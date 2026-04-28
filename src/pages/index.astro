@@ -1,7 +1,31 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 ---
 
-<BaseLayout>
-  <h1>Astro</h1>
-</BaseLayout>
+<PageLayout>
+  <section
+    id="hero"
+    class="flex min-h-screen items-center px-4 py-20 md:px-8"
+  >
+    <div class="mx-auto w-full max-w-6xl">
+      <p class="mono mb-4 text-sm text-secondary">Placeholder content</p>
+      <h1 class="gradient-text mb-6 text-5xl font-bold md:text-7xl">
+        Sam Riddle
+      </h1>
+      <p class="max-w-2xl text-lg leading-relaxed text-secondary">
+        Temporary homepage height while the real content sections are being
+        built.
+      </p>
+    </div>
+  </section>
+
+  <section class="min-h-screen px-4 py-20 md:px-8" aria-label="Coming soon">
+    <div class="mx-auto max-w-6xl">
+      <div class="card rounded-xl p-6">
+        <p class="text-secondary">
+          More homepage content is coming in the next milestone.
+        </p>
+      </div>
+    </div>
+  </section>
+</PageLayout>

@@ -69,17 +69,11 @@ html {
   width: 100%;
   height: 100%;
   background-image:
-    linear-gradient(var(--effect-grid-line-dark) 1px, transparent 1px),
-    linear-gradient(90deg, var(--effect-grid-line-dark) 1px, transparent 1px);
+    linear-gradient(var(--effect-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--effect-grid-line) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
   z-index: 1;
-}
-
-.light-mode .grid-pattern {
-  background-image:
-    linear-gradient(var(--effect-grid-line-light) 1px, transparent 1px),
-    linear-gradient(90deg, var(--effect-grid-line-light) 1px, transparent 1px);
 }
 
 .orb {
@@ -100,8 +94,8 @@ html {
   height: 300px;
   background: linear-gradient(
     135deg,
-    var(--color-red-800),
-    var(--color-red-600)
+    var(--effect-orb-red-start),
+    var(--effect-orb-red-end)
   );
   top: 10%;
   left: 70%;
@@ -113,8 +107,8 @@ html {
   height: 200px;
   background: linear-gradient(
     135deg,
-    var(--color-gray-800),
-    var(--color-red-700)
+    var(--effect-orb-mixed-start),
+    var(--effect-orb-mixed-end)
   );
   top: 60%;
   left: 10%;
@@ -126,8 +120,8 @@ html {
   height: 250px;
   background: linear-gradient(
     135deg,
-    var(--color-gray-700),
-    var(--color-gray-400)
+    var(--effect-orb-neutral-start),
+    var(--effect-orb-neutral-end)
   );
   top: 80%;
   left: 80%;
@@ -171,20 +165,12 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-surface-dark-soft);
-}
-
-.light-mode ::-webkit-scrollbar-track {
-  background: var(--color-surface-light-soft);
+  background: var(--color-surface-soft);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border-dark-medium);
+  background: var(--color-border-medium);
   border-radius: 4px;
-}
-
-.light-mode ::-webkit-scrollbar-thumb {
-  background: var(--color-border-light-medium);
 }
 
 ::-webkit-scrollbar-thumb:hover {

@@ -1,0 +1,76 @@
+---
+interface NavItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  navItems: NavItem[];
+}
+
+const { navItems } = Astro.props;
+---
+
+<div class="md:hidden">
+  <button
+    id="mobile-menu-button"
+    class="mobile-menu-button"
+    type="button"
+    aria-label="Toggle menu"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
+  >
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+  </button>
+
+  <div id="mobile-menu" class="mobile-menu">
+    <div class="flex flex-col gap-4 px-4 py-6">
+      {
+        navItems.map((item) => (
+          <a href={item.href} class="nav-link mobile-nav-link text-lg">
+            {item.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+
+  const closeMobileMenu = () => {
+    mobileMenuButton?.classList.remove("open");
+    mobileMenu?.classList.remove("open");
+    mobileMenuButton?.setAttribute("aria-expanded", "false");
+  };
+
+  mobileMenuButton?.addEventListener("click", (event) => {
+    event.stopPropagation();
+
+    const isOpen = mobileMenuButton.classList.toggle("open");
+    mobileMenu?.classList.toggle("open", isOpen);
+    mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  mobileNavLinks.forEach((link) => {
+    link.addEventListener("click", closeMobileMenu);
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Node)) {
+      return;
+    }
+
+    const isClickInsideMenu = mobileMenu?.contains(event.target);
+    const isClickOnButton = mobileMenuButton?.contains(event.target);
+
+    if (!isClickInsideMenu && !isClickOnButton) {
+      closeMobileMenu();
+    }
+  });
+</script>

@@ -1,4 +1,6 @@
 :root {
+  color-scheme: dark;
+
   --font-family-sans: "Inter", sans-serif;
   --font-family-mono: "JetBrains Mono", monospace;
 
@@ -27,41 +29,42 @@
   --color-red-400: #ff7080;
   --color-red-500: #ff4f60;
   --color-red-600: #ff3a4b;
+  --color-red-600-rgb: 255 58 75;
   --color-red-700: #e52b3b;
   --color-red-800: #d72635;
+  --color-red-800-rgb: 215 38 53;
   --color-red-900: #941a24;
-  --color-red-700-rgb: 229 43 59;
 
   --color-background: var(--color-gray-900);
-  --color-background-light: var(--color-gray-25);
-  --color-accent: var(--color-red-700);
-  --color-accent-light: var(--color-red-600);
-  --color-accent-dark: var(--color-red-800);
+  --color-background-rgb: var(--color-gray-900-rgb);
+  --color-background-overlay: rgb(var(--color-background-rgb) / 0.8);
+  --color-menu-background: rgb(var(--color-background-rgb) / 0.95);
+  --color-accent: var(--color-red-600);
+  --color-accent-rgb: var(--color-red-600-rgb);
+  --color-accent-light: var(--color-red-500);
+  --color-accent-dark: var(--color-red-700);
 
   --color-text-primary: var(--color-gray-25);
   --color-text-secondary: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.72);
   --color-text-tertiary: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.52);
-  --color-text-primary-light: var(--color-gray-900);
-  --color-text-secondary-light: rgb(var(--color-gray-900-rgb) / 0.72);
-  --color-text-tertiary-light: rgb(var(--color-gray-900-rgb) / 0.52);
 
-  --color-surface-dark-soft: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.05);
-  --color-surface-light-soft: rgb(var(--color-gray-900-rgb) / 0.03);
-  --color-border-dark-soft: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.1);
-  --color-border-dark-medium: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.2);
-  --color-border-dark-strong: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.3);
-  --color-border-light-soft: rgb(var(--color-gray-900-rgb) / 0.1);
-  --color-border-light-medium: rgb(var(--color-gray-900-rgb) / 0.2);
-  --color-border-light-strong: rgb(var(--color-gray-900-rgb) / 0.3);
-  --color-accent-soft: rgb(var(--color-red-700-rgb) / 0.1);
-  --color-accent-medium: rgb(var(--color-red-700-rgb) / 0.3);
-  --color-accent-strong: rgb(var(--color-red-700-rgb) / 0.5);
+  --color-surface-soft: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.05);
+  --color-border-soft: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.1);
+  --color-border-medium: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.2);
+  --color-border-strong: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.3);
+  --color-accent-soft: rgb(var(--color-accent-rgb) / 0.1);
+  --color-accent-medium: rgb(var(--color-accent-rgb) / 0.3);
+  --color-accent-strong: rgb(var(--color-accent-rgb) / 0.5);
 
-  --effect-mesh-red-soft: rgb(var(--color-gray-25-rgb) / 0.12);
+  --effect-mesh-red-soft: rgb(var(--color-accent-rgb) / 0.12);
   --effect-mesh-gray-soft: rgb(var(--color-gray-25-rgb) / 0.12);
-  --effect-grid-line-dark: rgb(100 100 100 / 0.03);
-  --effect-grid-line-light: rgb(var(--color-gray-900-rgb) / 0.04);
-
+  --effect-grid-line: rgb(100 100 100 / 0.03);
+  --effect-orb-red-start: var(--color-red-800);
+  --effect-orb-red-end: var(--color-red-600);
+  --effect-orb-mixed-start: var(--color-gray-800);
+  --effect-orb-mixed-end: var(--color-red-700);
+  --effect-orb-neutral-start: var(--color-gray-700);
+  --effect-orb-neutral-end: var(--color-gray-400);
 
   --shadow-accent: 0 4px 12px var(--color-accent-medium);
   --shadow-card-hover: 0 8px 24px rgb(var(--color-gray-900-rgb) / 0.1);
@@ -83,4 +86,37 @@
   --content-width: 80ch;
   --page-padding: 1rem;
   --nav-breakpoint: 636px;
+}
+
+:root.light-mode {
+  color-scheme: light;
+
+  --color-background: var(--color-gray-25);
+  --color-background-rgb: var(--color-gray-25-rgb);
+  --color-background-overlay: rgb(var(--color-background-rgb) / 0.8);
+  --color-menu-background: rgb(var(--color-background-rgb) / 0.95);
+
+  --color-text-primary: var(--color-gray-900);
+  --color-text-secondary: rgb(var(--color-gray-900-rgb) / 0.72);
+  --color-text-tertiary: rgb(var(--color-gray-900-rgb) / 0.52);
+
+  --color-accent: var(--color-red-800);
+  --color-accent-rgb: var(--color-red-800-rgb);
+  --color-accent-light: var(--color-red-700);
+  --color-accent-dark: var(--color-red-900);
+
+  --color-surface-soft: rgb(var(--color-gray-900-rgb) / 0.03);
+  --color-border-soft: rgb(var(--color-gray-900-rgb) / 0.1);
+  --color-border-medium: rgb(var(--color-gray-900-rgb) / 0.2);
+  --color-border-strong: rgb(var(--color-gray-900-rgb) / 0.3);
+
+  --effect-mesh-red-soft: rgb(var(--color-accent-rgb) / 0.08);
+  --effect-mesh-gray-soft: rgb(var(--color-gray-900-rgb) / 0.08);
+  --effect-grid-line: rgb(var(--color-gray-900-rgb) / 0.04);
+  --effect-orb-red-start: var(--color-red-700);
+  --effect-orb-red-end: var(--color-red-500);
+  --effect-orb-mixed-start: var(--color-gray-300);
+  --effect-orb-mixed-end: var(--color-red-600);
+  --effect-orb-neutral-start: var(--color-gray-200);
+  --effect-orb-neutral-end: var(--color-gray-500);
 }

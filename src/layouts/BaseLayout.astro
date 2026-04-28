@@ -1,5 +1,4 @@
 ---
-import BackgroundEffects from "../components/layout/BackgroundEffects.astro";
 import "../styles/tokens.css";
 import "../styles/global.css";
 import "../styles/effects.css";
@@ -17,6 +16,9 @@ const {
   canonicalUrl = "https://samuelwriddle.com",
   imageUrl = "https://samuelwriddle.com/favicon.svg",
 } = Astro.props;
+
+const darkThemeColor = "#111115";
+const lightThemeColor = "#ffffff";
 ---
 
 <!doctype html>
@@ -25,6 +27,21 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      (() => {
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+        const syncTheme = ({ matches }) => {
+          document.documentElement.classList.toggle("light-mode", !matches);
+          document.documentElement.style.colorScheme = matches
+            ? "dark"
+            : "light";
+        };
+
+        syncTheme(mediaQuery);
+        mediaQuery.addEventListener("change", syncTheme);
+      })();
+    </script>
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -35,7 +52,16 @@ const {
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <meta name="theme-color" content="#ffffff" />
+    <meta
+      name="theme-color"
+      content={darkThemeColor}
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content={lightThemeColor}
+      media="(prefers-color-scheme: light)"
+    />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -56,10 +82,6 @@ const {
     />
   </head>
   <body class="min-h-screen">
-    <BackgroundEffects />
-
-    <div class="relative z-10">
-      <slot />
-    </div>
+    <slot />
   </body>
 </html>
