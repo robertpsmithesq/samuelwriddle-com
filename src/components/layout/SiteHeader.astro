@@ -1,4 +1,5 @@
 ---
+import Container from "../ui/Container.astro";
 import MobileNav from "./MobileNav.astro";
 
 const navItems = [
@@ -11,24 +12,26 @@ const navItems = [
 ---
 
 <header class="sticky-nav px-4 py-4 md:px-8">
-  <nav
-    class="mx-auto flex max-w-6xl items-center justify-between"
-    aria-label="Primary navigation"
-  >
-    <a href="#hero" class="site-logo" aria-label="Sam Riddle home">
-      <span aria-hidden="true"></span>
-    </a>
+  <Container>
+    <nav
+      class="flex items-center justify-between"
+      aria-label="Primary navigation"
+    >
+      <a href="#hero" class="site-logo" aria-label="Sam Riddle home">
+        <span aria-hidden="true"></span>
+      </a>
 
-    <div class="hidden gap-6 text-sm md:flex">
-      {
-        navItems.map((item) => (
-          <a href={item.href} class="nav-link desktop-nav-link">
-            {item.label}
-          </a>
-        ))
-      }
-    </div>
+      <div class="hidden gap-6 text-sm md:flex">
+        {
+          navItems.map((item) => (
+            <a href={item.href} class="nav-link desktop-nav-link">
+              {item.label}
+            </a>
+          ))
+        }
+      </div>
 
-    <MobileNav navItems={navItems} />
-  </nav>
+      <MobileNav navItems={navItems} />
+    </nav>
+  </Container>
 </header>
