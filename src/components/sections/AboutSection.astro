@@ -1,0 +1,57 @@
+---
+import Container from "../ui/Container.astro";
+---
+
+<section id="about" class="px-4 py-20 md:px-8">
+  <Container>
+    <h2 class="mb-12 text-3xl font-bold">
+      About <span class="accent-red">Me</span>
+    </h2>
+    <div class="grid items-center gap-12 md:grid-cols-2">
+      <div class="order-1">
+        <figure class="relative mx-auto w-full max-w-sm md:max-w-md">
+          <div
+            class="overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl shadow-black/20"
+          >
+            <img
+              src="/assets/sam_riddle.jpg"
+              alt="Sam Riddle"
+              class="aspect-[4/5] h-full w-full object-cover"
+              style="object-position: 68% top;"
+            />
+          </div>
+          <figcaption
+            class="mt-4 border-l-2 border-[var(--color-accent)] pl-4 md:absolute md:top-full md:right-0 md:left-0"
+          >
+            <p class="font-medium">Sam Riddle</p>
+            <p class="text-secondary text-sm">
+              The University of Alabama, 2024
+            </p>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="order-2">
+        <p class="text-secondary mb-6 text-lg leading-relaxed">
+          I'm currently building academic technology at QuantHub, where I work
+          on software that supports how students learn skills and how educators
+          teach them. I see that work as part of a broader mission to learn new
+          things and help people get better at what they do.
+        </p>
+
+        <p class="text-secondary mb-6 text-lg leading-relaxed">
+          I studied Management Information Systems, Operations Management, and
+          Decision Analytics at The University of Alabama. That background
+          helped me pursue my interests in how work flows, how decisions get
+          made, and how small efforts compound to make big differences.
+        </p>
+
+        <p class="text-secondary mb-6 text-lg leading-relaxed">
+          I'm a quick learner with a strong attention to detail, but the
+          qualities I value most are diligence, authenticity, and reliability. I
+          want to do excellent work, but I also want to be the kind of person
+          people trust and enjoy working with.
+        </p>
+      </div>
+    </div>
+  </Container>
+</section>
