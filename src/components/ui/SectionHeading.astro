@@ -1,0 +1,14 @@
+---
+interface Props {
+  text: string;
+  highlight: string;
+  class?: string;
+}
+
+const { text, highlight, class: className } = Astro.props;
+---
+
+<h2 class:list={["mb-12 text-3xl font-bold", className]}>
+  {text}
+  <span class="accent-red">{highlight}</span>
+</h2>
