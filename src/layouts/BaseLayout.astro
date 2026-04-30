@@ -14,7 +14,7 @@ const {
   title = "Sam Riddle",
   description = "Personal website of Sam Riddle, a software engineer specializing in web development.",
   canonicalUrl = "https://samuelwriddle.com",
-  imageUrl = "https://samuelwriddle.com/favicon.svg",
+  imageUrl = "https://samuelwriddle.com/favicon-red.svg",
 } = Astro.props;
 
 const darkThemeColor = "#111115";
@@ -48,9 +48,8 @@ const lightThemeColor = "#ffffff";
 
     <link rel="canonical" href={canonicalUrl} />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-red.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-light-red.svg" media="(prefers-color-scheme: dark)" />
 
     <meta
       name="theme-color"
