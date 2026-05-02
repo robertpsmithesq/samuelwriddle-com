@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+import Timeline from "../content/Timeline.astro";
+import TimelineItem from "../content/TimelineItem.astro";
+import Container from "../ui/Container.astro";
+
+const experiences = await getCollection("experience");
+
+const sortedExperiences = experiences.sort((a, b) => {
+  if (a.data.order != null && b.data.order != null) {
+    return a.data.order - b.data.order;
+  }
+
+  if (a.data.order != null) {
+    return -1;
+  }
+
+  if (b.data.order != null) {
+    return 1;
+  }
+
+  return b.data.startDate.getTime() - a.data.startDate.getTime();
+});
+
+const monthYear = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  timeZone: "UTC",
+  year: "numeric",
+});
+
+const toDateLabel = (startDate: Date, endDate: Date | "Present") => {
+  const start = monthYear.format(startDate);
+  const end = endDate === "Present" ? endDate : monthYear.format(endDate);
+
+  return `${start} – ${end}`;
+};
+---
+
+<section id="experience" class="px-4 py-20 md:px-8">
+  <Container class="max-w-6xl">
+    <h2 class="mb-12 text-3xl font-bold">
+      My <span class="accent-red">Experience</span>
+    </h2>
+
+    <Timeline>
+      {
+        sortedExperiences.map((experience) => (
+          <TimelineItem
+            title={experience.data.title}
+            dateLabel={toDateLabel(
+              experience.data.startDate,
+              experience.data.endDate,
+            )}
+            company={experience.data.company}
+            location={experience.data.location}
+            highlights={experience.data.highlights}
+            skills={experience.data.skills}
+          />
+        ))
+      }
+    </Timeline>
+  </Container>
+</section>

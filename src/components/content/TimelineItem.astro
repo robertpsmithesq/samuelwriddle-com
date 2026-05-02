@@ -1,0 +1,42 @@
+---
+import Badge from "../ui/Badge.astro";
+import Card from "../ui/Card.astro";
+
+interface Props {
+  title: string;
+  dateLabel: string;
+  company: string;
+  location: string;
+  highlights: string[];
+  skills: string[];
+}
+
+const { title, dateLabel, company, location, highlights, skills } = Astro.props;
+---
+
+<article class="relative pl-10 md:pl-20">
+  <div
+    class="timeline-dot absolute top-7 left-1 h-4 w-4 rounded-full md:left-6"
+    aria-hidden="true"
+  >
+  </div>
+
+  <Card>
+    <header
+      class="mb-2 flex flex-col gap-2 md:flex-row md:items-start md:justify-between"
+    >
+      <h3 class="text-xl font-semibold">{title}</h3>
+      <span class="text-secondary text-sm">{dateLabel}</span>
+    </header>
+
+    <p class="mb-3">{company} | {location}</p>
+
+    <ul class="text-secondary space-y-2">
+      {highlights.map((highlight) => <li>• {highlight}</li>)}
+    </ul>
+
+    <div class="mt-4 flex flex-wrap gap-2">
+      {skills.map((skill) => <Badge class="rounded text-xs">{skill}</Badge>)}
+    </div>
+  </Card>
+</article>
