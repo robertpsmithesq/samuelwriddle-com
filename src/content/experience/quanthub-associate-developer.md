@@ -1,5 +1,5 @@
 ---
-title: Associate Software Engineer
+title: Associate Engineer
 company: QuantHub
 location: Birmingham, AL
 startDate: 2025-05-01

@@ -34,6 +34,9 @@ const toDateLabel = (startDate: Date, endDate: Date | "Present") => {
 
   return `${start} – ${end}`;
 };
+
+const visibleExperiences = sortedExperiences.slice(0, 2);
+const expandableExperiences = sortedExperiences.slice(2);
 ---
 
 <section id="experience" class="px-4 py-20 md:px-8">
@@ -42,22 +45,109 @@ const toDateLabel = (startDate: Date, endDate: Date | "Present") => {
       My <span class="accent-red">Experience</span>
     </h2>
 
-    <Timeline>
-      {
-        sortedExperiences.map((experience) => (
-          <TimelineItem
-            title={experience.data.title}
-            dateLabel={toDateLabel(
-              experience.data.startDate,
-              experience.data.endDate,
-            )}
-            company={experience.data.company}
-            location={experience.data.location}
-            highlights={experience.data.highlights}
-            skills={experience.data.skills}
-          />
-        ))
-      }
-    </Timeline>
+    <div class="mx-auto w-full md:w-[60vw] md:max-w-full">
+      <Timeline>
+        {
+          visibleExperiences.map((experience) => (
+            <TimelineItem
+              title={experience.data.title}
+              dateLabel={toDateLabel(
+                experience.data.startDate,
+                experience.data.endDate,
+              )}
+              company={experience.data.company}
+              location={experience.data.location}
+              highlights={experience.data.highlights}
+              skills={experience.data.skills}
+              isCurrent={experience.data.endDate === "Present"}
+            />
+          ))
+        }
+
+        {
+          expandableExperiences.length > 0 && (
+            <div class="timeline-reveal" data-timeline-reveal>
+              <button
+                class="timeline-reveal-pill timeline-reveal-pill--top"
+                type="button"
+                aria-expanded="false"
+                data-timeline-expand
+              >
+                Show earlier experience
+              </button>
+
+              <div class="timeline-reveal-items" data-timeline-reveal-items>
+                <div class="space-y-12">
+                  {expandableExperiences.map((experience) => (
+                    <TimelineItem
+                      title={experience.data.title}
+                      dateLabel={toDateLabel(
+                        experience.data.startDate,
+                        experience.data.endDate,
+                      )}
+                      company={experience.data.company}
+                      location={experience.data.location}
+                      highlights={experience.data.highlights}
+                      skills={experience.data.skills}
+                      isCurrent={experience.data.endDate === "Present"}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <button
+                class="timeline-reveal-pill timeline-reveal-pill--bottom"
+                type="button"
+                aria-expanded="true"
+                data-timeline-collapse
+              >
+                Hide earlier experience
+              </button>
+            </div>
+          )
+        }
+      </Timeline>
+    </div>
   </Container>
 </section>
+
+<script>
+  const reveal = document.querySelector("[data-timeline-reveal]");
+
+  if (reveal) {
+    const expandButton = reveal.querySelector("[data-timeline-expand]");
+    const collapseButton = reveal.querySelector("[data-timeline-collapse]");
+    const revealItems = reveal.querySelector("[data-timeline-reveal-items]");
+
+    const setExpanded = (expanded: boolean) => {
+      if (revealItems instanceof HTMLElement) {
+        revealItems.style.maxHeight = expanded
+          ? `${revealItems.scrollHeight}px`
+          : "";
+      }
+
+      reveal.classList.toggle("timeline-reveal--open", expanded);
+      expandButton?.setAttribute("aria-expanded", String(expanded));
+      collapseButton?.setAttribute("aria-expanded", String(expanded));
+      revealItems?.setAttribute("aria-hidden", String(!expanded));
+    };
+
+    expandButton?.addEventListener("click", () => setExpanded(true));
+    collapseButton?.addEventListener("click", () => {
+      setExpanded(false);
+      expandButton?.scrollIntoView({ block: "center", behavior: "smooth" });
+    });
+
+    reveal.classList.add("timeline-reveal--ready");
+    setExpanded(false);
+
+    window.addEventListener("resize", () => {
+      if (
+        reveal.classList.contains("timeline-reveal--open") &&
+        revealItems instanceof HTMLElement
+      ) {
+        revealItems.style.maxHeight = `${revealItems.scrollHeight}px`;
+      }
+    });
+  }
+</script>
