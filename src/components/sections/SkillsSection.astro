@@ -1,0 +1,79 @@
+---
+import Container from "../ui/Container.astro";
+
+const skillColumns = [
+  {
+    label: "Hard Skills",
+    skills: [
+      {
+        name: "Ruby on Rails",
+        description:
+          "Placeholder sentence about how I use Rails to build practical web applications with clear conventions. Placeholder sentence about the kind of product or team problems this helps me solve.",
+      },
+      {
+        name: "SQL",
+        description:
+          "Placeholder sentence about how I use SQL to understand relationships, answer questions, and validate assumptions. Placeholder sentence about how this supports reporting, operations, or decision-making.",
+      },
+      {
+        name: "Excel",
+        description:
+          "Placeholder sentence about how I use Excel for modeling, analysis, and quick operational problem solving. Placeholder sentence about how it helps me make messy work more understandable.",
+      },
+    ],
+  },
+  {
+    label: "Soft Skills",
+    skills: [
+      {
+        name: "Critical Thinking",
+        description:
+          "Placeholder sentence about how I break ambiguous problems into smaller decisions that can move. Placeholder sentence about how I look for constraints, tradeoffs, and missing assumptions.",
+      },
+      {
+        name: "Attention to Detail",
+        description:
+          "Placeholder sentence about how I catch edge cases, inconsistencies, and rough edges early. Placeholder sentence about how that habit improves the work before it reaches someone else.",
+      },
+      {
+        name: "Reliability",
+        description:
+          "Placeholder sentence about how I follow through with steady communication and clean handoffs. Placeholder sentence about how I try to make work easier to trust when I am responsible for it.",
+      },
+    ],
+  },
+];
+---
+
+<section id="skills" class="px-4 py-20 md:px-8">
+  <Container>
+    <div class="mb-12 max-w-2xl">
+      <h2 class="text-3xl font-bold">
+        My <span class="accent-red">Skills</span>
+      </h2>
+    </div>
+
+    <div class="skills-board" aria-label="Skills grouped by type">
+      {
+        skillColumns.map((column) => (
+          <article class="skills-panel">
+            <div class="skills-panel-heading">
+              <h3>{column.label}</h3>
+            </div>
+
+            <ul class="skills-tiles" aria-label={column.label}>
+              {column.skills.map((skill) => (
+                <li class="skills-cell">
+                  <div class="skills-cell-header">
+                    <h4 class="skills-cell-title">{skill.name}</h4>
+                  </div>
+                  <p class="skills-cell-description">{skill.description}</p>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </Container>
+</section>
