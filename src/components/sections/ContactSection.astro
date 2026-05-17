@@ -1,0 +1,64 @@
+---
+import Container from "../ui/Container.astro";
+
+const links = [
+  {
+    label: "LinkedIn",
+    description: "Professionally connect with me.",
+    href: "https://www.linkedin.com/in/samuel-w-riddle",
+  },
+  {
+    label: "GitHub",
+    description: "Proof that I'm actually building things.",
+    href: "https://github.com/riddlemeS4m",
+  },
+];
+---
+
+<section id="contact" class="px-4 py-20 md:px-8">
+  <Container class="max-w-6xl">
+    <div class="mx-auto w-full md:w-[60vw] md:max-w-full">
+      <div class="mx-auto mb-8 max-w-2xl text-center">
+        <p class="online-section-cta">
+          Want to see what I'm building or get in touch?
+        </p>
+        <h2 class="text-3xl font-bold">
+          Find Me <span class="accent-red">Online</span>
+        </h2>
+      </div>
+
+      <div class="grid gap-4 md:grid-cols-2">
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="online-link group"
+              aria-label={`${link.label}: ${link.description} Opens in a new tab.`}
+            >
+              <span class="online-link-copy">
+                <span class="online-link-label">{link.label}</span>
+                <span class="online-link-description">{link.description}</span>
+              </span>
+
+              <span class="online-link-arrow" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14" />
+                  <path d="m13 6 6 6-6 6" />
+                </svg>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </Container>
+</section>
