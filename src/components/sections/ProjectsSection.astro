@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import Project from "../content/Project.astro";
+import Container from "../ui/Container.astro";
+
+const projects = await getCollection("projects");
+
+const sortedProjects = projects.sort((a, b) => {
+  if (a.data.order != null && b.data.order != null) {
+    return a.data.order - b.data.order;
+  }
+
+  if (a.data.order != null) {
+    return -1;
+  }
+
+  if (b.data.order != null) {
+    return 1;
+  }
+
+  return a.data.name.localeCompare(b.data.name);
+});
+---
+
+<section id="projects" class="px-4 py-20 md:px-8">
+  <Container>
+    <div class="mb-12 max-w-2xl">
+      <h2 class="text-3xl font-bold">
+        My <span class="accent-red">Projects</span>
+      </h2>
+    </div>
+
+    <div class="project-features" aria-label="Featured projects">
+      {
+        sortedProjects.map((project) => (
+          <Project
+            name={project.data.name}
+            tag={project.data.tag}
+            href={project.data.href}
+            description={project.data.description}
+            tags={project.data.tags}
+            image={project.data.image}
+            reverse={project.data.reverse}
+          />
+        ))
+      }
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,31 @@
+---
+import Badge from "../ui/Badge.astro";
+import ProjectCard from "./ProjectCard.astro";
+
+interface Props {
+  name: string;
+  tag: string;
+  href: string;
+  description: string;
+  tags: string[];
+  image?: string;
+  reverse?: boolean;
+}
+
+const { name, tag, href, description, tags, image, reverse = false } =
+  Astro.props;
+---
+
+<article
+  class:list={["project-feature", reverse && "project-feature--reversed"]}
+>
+  <div class="project-feature-copy">
+    <h3>{name}</h3>
+    <p>{description}</p>
+    <div class="project-feature-tags" aria-label={`${name} technologies`}>
+      {tags.map((technology) => <Badge>{technology}</Badge>)}
+    </div>
+  </div>
+
+  <ProjectCard name={name} tag={tag} href={href} image={image} />
+</article>
