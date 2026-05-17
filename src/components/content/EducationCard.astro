@@ -1,0 +1,41 @@
+---
+import Card from "../ui/Card.astro";
+
+interface Props {
+  degree: string;
+  dateLabel: string;
+  institution: string;
+  location: string;
+  details?: string;
+  highlights: string[];
+}
+
+const { degree, dateLabel, institution, location, details, highlights } =
+  Astro.props;
+---
+
+<article class="timeline-item relative pl-10 md:pl-20">
+  <div
+    class="timeline-dot absolute top-8 left-1 h-4 w-4 rounded-full md:left-6"
+    aria-hidden="true"
+  >
+    <span></span>
+  </div>
+
+  <Card class="timeline-card">
+    <header
+      class="mb-2 flex flex-col gap-2 md:flex-row md:items-start md:justify-between"
+    >
+      <h3 class="text-xl font-semibold">{degree}</h3>
+      <span class="text-secondary text-sm">{dateLabel}</span>
+    </header>
+
+    <p class="mb-3">{institution} | {location}</p>
+
+    {details && <p class="text-secondary mb-3">{details}</p>}
+
+    <ul class="impact-list text-secondary space-y-2">
+      {highlights.map((highlight) => <li>{highlight}</li>)}
+    </ul>
+  </Card>
+</article>
