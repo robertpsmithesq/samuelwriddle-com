@@ -1,0 +1,61 @@
+---
+import { getCollection } from "astro:content";
+import EducationCard from "../content/EducationCard.astro";
+import Timeline from "../content/Timeline.astro";
+import Container from "../ui/Container.astro";
+
+const educationItems = await getCollection("education");
+
+const sortedEducationItems = educationItems.sort((a, b) => {
+  if (a.data.order != null && b.data.order != null) {
+    return a.data.order - b.data.order;
+  }
+
+  if (a.data.order != null) {
+    return -1;
+  }
+
+  if (b.data.order != null) {
+    return 1;
+  }
+
+  return b.data.startDate.getTime() - a.data.startDate.getTime();
+});
+
+const monthYear = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  timeZone: "UTC",
+  year: "numeric",
+});
+
+const toDateLabel = (startDate: Date, endDate: Date) =>
+  `${monthYear.format(startDate)} – ${monthYear.format(endDate)}`;
+---
+
+<section id="education" class="px-4 py-20 md:px-8">
+  <Container class="max-w-6xl">
+    <h2 class="mb-12 text-3xl font-bold">
+      My <span class="accent-red">Education</span>
+    </h2>
+
+    <div class="mx-auto w-full md:w-[60vw] md:max-w-full">
+      <Timeline>
+        {
+          sortedEducationItems.map((education) => (
+            <EducationCard
+              degree={education.data.degree}
+              dateLabel={toDateLabel(
+                education.data.startDate,
+                education.data.endDate,
+              )}
+              institution={education.data.institution}
+              location={education.data.location}
+              details={education.data.details}
+              highlights={education.data.highlights}
+            />
+          ))
+        }
+      </Timeline>
+    </div>
+  </Container>
+</section>
