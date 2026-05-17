@@ -9,12 +9,12 @@ tags:
   - Ruby on Rails
   - PostgreSQL
   - Tailwind CSS
-  - Webpack
-  - RSpec
   - Stripe
   - Sentry
   - AWS S3
   - GitLab CI
+  - LTI 1.3 Advantage
+  - WCAG AAA
   - Linear
   - Cursor
 order: 1

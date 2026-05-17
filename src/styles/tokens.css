@@ -112,7 +112,7 @@
 
   --effect-mesh-red-soft: rgb(var(--color-accent-rgb) / 0.08);
   --effect-mesh-gray-soft: rgb(var(--color-gray-900-rgb) / 0.08);
-  --effect-grid-line: rgb(var(--color-gray-900-rgb) / 0.04);
+  --effect-grid-line: rgb(var(--color-gray-900-rgb) / 0.02);
   --effect-orb-red-start: var(--color-red-700);
   --effect-orb-red-end: var(--color-red-500);
   --effect-orb-mixed-start: var(--color-gray-300);

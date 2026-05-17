@@ -2,11 +2,21 @@
 interface Props {
   class?: string;
   interactive?: boolean;
+  solid?: boolean;
 }
 
-const { class: className, interactive = false } = Astro.props;
+const { class: className, interactive = false, solid = false } = Astro.props;
 ---
 
-<span class:list={["tech-badge rounded-lg px-3 py-1 text-sm", { "tech-badge--interactive": interactive }, className]}>
+<span
+  class:list={[
+    "tech-badge rounded-lg px-3 py-1 text-sm",
+    {
+      "tech-badge--interactive": interactive,
+      "tech-badge--solid": solid,
+    },
+    className,
+  ]}
+>
   <slot />
 </span>
