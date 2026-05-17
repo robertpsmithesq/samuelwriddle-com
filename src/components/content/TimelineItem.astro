@@ -1,0 +1,70 @@
+---
+import Badge from "../ui/Badge.astro";
+import Card from "../ui/Card.astro";
+
+interface Props {
+  title: string;
+  dateLabel: string;
+  company: string;
+  location: string;
+  highlights: string[];
+  skills: string[];
+  isCurrent?: boolean;
+}
+
+const {
+  title,
+  dateLabel,
+  company,
+  location,
+  highlights,
+  skills,
+  isCurrent = false,
+} = Astro.props;
+
+const cardClass = ["timeline-card", isCurrent && "timeline-card--current"]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<article
+  class:list={[
+    "timeline-item relative pl-10 md:pl-20",
+    { "timeline-item--current": isCurrent },
+  ]}
+>
+  <div
+    class="timeline-dot absolute top-8 left-1 h-4 w-4 rounded-full md:left-6"
+    aria-hidden="true"
+  >
+    <span></span>
+  </div>
+
+  <Card class={cardClass}>
+    <header
+      class="mb-2 flex flex-col gap-2 md:flex-row md:items-start md:justify-between"
+    >
+      <div class="flex flex-wrap items-center gap-3">
+        <h3 class="text-xl font-semibold">{title}</h3>
+        {
+          isCurrent && (
+            <span class="timeline-current-badge mono rounded-full px-2.5 py-1 text-xs">
+              Current
+            </span>
+          )
+        }
+      </div>
+      <span class="text-secondary text-sm">{dateLabel}</span>
+    </header>
+
+    <p class="mb-3">{company} | {location}</p>
+
+    <ul class="impact-list text-secondary space-y-2">
+      {highlights.map((highlight) => <li>{highlight}</li>)}
+    </ul>
+
+    <div class="mt-4 flex flex-wrap gap-2">
+      {skills.map((skill) => <Badge class="rounded text-xs">{skill}</Badge>)}
+    </div>
+  </Card>
+</article>
