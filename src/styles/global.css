@@ -340,3 +340,128 @@ body {
   background: var(--color-text-primary);
   box-shadow: 0 0 10px rgb(239 68 68 / 45%);
 }
+
+.skills-map {
+  display: grid;
+  gap: 1.75rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.skills-map-row {
+  position: relative;
+  display: grid;
+  gap: 0.875rem;
+  align-items: center;
+  padding: 0 0 2.25rem;
+  text-align: center;
+}
+
+.skills-map-row::after {
+  position: absolute;
+  right: 12%;
+  bottom: 0;
+  left: 12%;
+  height: 1px;
+  content: "";
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-border-soft),
+    transparent
+  );
+  opacity: 0.55;
+}
+
+.skills-map-row:last-child {
+  padding-bottom: 0;
+}
+
+.skills-map-row:last-child::after {
+  display: none;
+}
+
+.skills-map-skill h3 {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.skills-map-output-text {
+  max-width: 34rem;
+  margin: 0 auto;
+  font-size: 1.125rem;
+  line-height: 1.625;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.skills-map-output-prompt {
+  max-width: 34rem;
+  margin: 0.35rem auto 0;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  font-style: italic;
+  line-height: 1.45;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.skills-map-arrow {
+  display: grid;
+  place-items: center;
+  min-height: 2.5rem;
+  color: var(--color-accent);
+}
+
+.skills-map-arrow span {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-family: var(--font-family-mono);
+  font-size: 1.75rem;
+  line-height: 1;
+  transform: rotate(90deg);
+}
+
+@media (min-width: 768px) {
+  .skills-map {
+    gap: 1.25rem;
+    width: 60vw;
+    min-width: 42rem;
+    max-width: 100%;
+  }
+
+  .skills-map-row {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 1.75rem;
+    padding: 2.25rem 0;
+    text-align: left;
+  }
+
+  .skills-map-skill {
+    text-align: center;
+  }
+
+  .skills-map-row:first-child {
+    padding-top: 0;
+  }
+
+  .skills-map-row:last-child {
+    padding-bottom: 0;
+  }
+
+  .skills-map-row::after {
+    right: 18%;
+    left: 18%;
+    opacity: 0.38;
+  }
+
+  .skills-map-arrow span {
+    transform: none;
+  }
+}

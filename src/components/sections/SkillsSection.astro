@@ -1,0 +1,62 @@
+---
+import Container from "../ui/Container.astro";
+
+const skillMappings = [
+  {
+    skill: "Critical Thinking",
+    output: "I break complex problems into practical pieces, and I use real-world examples to make them easy to understand.",
+    prompt: "Ask me about my hackathon win."
+  },
+  {
+    skill: "Process Design",
+    output: "I separate vague workflows into clear stages, and I'm aware of bottlenecks.",
+    prompt: "Ask me about my budgeting app."
+  },
+  {
+    skill: "Domain Modeling",
+    output: "I know where responsibilities belong, and I'm tough on scope creep.",
+    prompt: "Ask me about my ViewComponent design patterns."
+  },
+  {
+    skill: "Planning & Execution",
+    output: "I bring structure to open-ended projects, and I deliver high-quality results.",
+    prompt: "Ask me about mock interviews."
+  },
+  {
+    skill: "Stakeholder Relationships",
+    output: "I build trust with clear communication, and I enjoy assisting my teammates.",
+    prompt: "Ask me about doing code reviews as a junior."
+  },
+];
+---
+
+<section id="skills" class="px-4 py-20 md:px-8">
+  <Container>
+    <div class="mb-12 max-w-2xl">
+      <h2 class="text-3xl font-bold">
+        My <span class="accent-red">Skills</span>
+      </h2>
+    </div>
+
+    <div class="skills-map" aria-label="Skills mapped to outcomes">
+      {
+        skillMappings.map((skill) => (
+          <article class="skills-map-row">
+            <div class="skills-map-skill">
+              <h3>{skill.skill}</h3>
+            </div>
+
+            <div class="skills-map-arrow" aria-hidden="true">
+              <span>→</span>
+            </div>
+
+            <div class="skills-map-output">
+              <p class="skills-map-output-text">{skill.output}</p>
+              <p class="skills-map-output-prompt">{skill.prompt}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </Container>
+</section>
