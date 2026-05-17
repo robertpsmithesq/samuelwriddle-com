@@ -1,0 +1,58 @@
+---
+import Container from "../ui/Container.astro";
+
+const strengths = ["Learner", "Focus", "Achiever", "Analytical", "Relator"];
+---
+
+<section id="strengths" class="px-4 py-20 md:px-8">
+  <Container>
+    <h2 class="mb-12 text-3xl font-bold">
+      My <span class="accent-red">Strengths</span>
+    </h2>
+
+    <div class="grid gap-10 md:grid-cols-5 md:gap-16">
+      <ol
+        class="w-full max-w-xs space-y-5 md:col-span-2 md:justify-self-center md:self-center"
+        aria-label="CliftonStrengths themes"
+      >
+        {
+          strengths.map((strength, index) => (
+            <li class="flex items-baseline gap-4 border-b border-[var(--color-border-soft)] pb-5 last:border-b-0 last:pb-0">
+              <span class="mono text-sm text-[var(--color-accent)]">
+                {(index + 1).toString().padStart(2, "0")}
+              </span>
+              <span class="text-xl font-semibold text-[var(--color-text-primary)]">
+                {strength}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div
+        class="text-secondary space-y-6 text-lg leading-relaxed md:col-span-3"
+      >
+        <p>
+          I work best when I have space to understand a problem before rushing
+          to solve it. I like to ask good questions, narrow the scope, inspect
+          the evidence, and make steady progress while building trust with
+          everyone involved.
+        </p>
+
+        <p>
+          Learner and Analytical help me understand things. Focus and Achiever
+          help me turn that understanding into high-quality work. Relator keeps
+          that work focused on actually helping people, because the best
+          solutions depend on people trusting each other to be honest,
+          thoughtful, and reliable.
+        </p>
+
+        <p>
+          In practice, that means I care about clear communication, project
+          momentum, and personal context. I like making ambiguous problems feel
+          workable without pretending they're simpler than they actually are.
+        </p>
+      </div>
+    </div>
+  </Container>
+</section>
