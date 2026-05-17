@@ -1,0 +1,26 @@
+---
+interface Props {
+  name: string;
+  tag: string;
+  href: string;
+  image?: string;
+}
+
+const { name, tag, href, image } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="project-card card card--interactive"
+  aria-label={`Open ${name}`}
+>
+  <div class="project-card-preview" aria-hidden="true">
+    {image ? <img src={image} alt="" loading="lazy" /> : <span>{name}</span>}
+  </div>
+  <div class="project-card-caption">
+    <p>{name}</p>
+    <p>{tag}</p>
+  </div>
+</a>
