@@ -12,8 +12,15 @@ interface Props {
   reverse?: boolean;
 }
 
-const { name, tag, href, description, tags, image, reverse = false } =
-  Astro.props;
+const {
+  name,
+  tag,
+  href,
+  description,
+  tags,
+  image,
+  reverse = false,
+} = Astro.props;
 ---
 
 <article
@@ -23,7 +30,7 @@ const { name, tag, href, description, tags, image, reverse = false } =
     <h3>{name}</h3>
     <p>{description}</p>
     <div class="project-feature-tags" aria-label={`${name} technologies`}>
-      {tags.map((technology) => <Badge>{technology}</Badge>)}
+      {tags.map((technology) => <Badge solid>{technology}</Badge>)}
     </div>
   </div>
 

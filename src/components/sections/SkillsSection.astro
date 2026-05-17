@@ -4,28 +4,33 @@ import Container from "../ui/Container.astro";
 const skillMappings = [
   {
     skill: "Critical Thinking",
-    output: "I break complex problems into practical pieces, and I use real-world examples to make them easy to understand.",
-    prompt: "Ask me about my hackathon win."
+    output:
+      "I break complex problems into practical pieces, and I simplify them to real-world examples.",
+    prompt: "Ask me about my hackathon win.",
   },
   {
     skill: "Process Design",
-    output: "I separate vague workflows into clear stages, and I'm aware of bottlenecks.",
-    prompt: "Ask me about my budgeting app."
+    output:
+      "I separate vague workflows into clear stages, and I'm aware of bottlenecks.",
+    prompt: "Ask me about my budgeting app.",
   },
   {
     skill: "Domain Modeling",
-    output: "I know where responsibilities belong, and I'm tough on scope creep.",
-    prompt: "Ask me about my ViewComponent design patterns."
+    output:
+      "I know where responsibilities belong, and I'm tough on scope creep.",
+    prompt: "Ask me about my ViewComponent design patterns.",
   },
   {
     skill: "Planning & Execution",
-    output: "I bring structure to open-ended projects, and I deliver high-quality results.",
-    prompt: "Ask me about mock interviews."
+    output:
+      "I bring structure to open-ended projects, and I deliver high-quality results.",
+    prompt: "Ask me about mock interviews.",
   },
   {
     skill: "Stakeholder Relationships",
-    output: "I build trust with clear communication, and I enjoy assisting my teammates.",
-    prompt: "Ask me about doing code reviews as a junior."
+    output:
+      "I build trust with clear communication, and I enjoy assisting my teammates.",
+    prompt: "Ask me about doing code reviews as a junior.",
   },
 ];
 ---
@@ -44,10 +49,6 @@ const skillMappings = [
           <article class="skills-map-row">
             <div class="skills-map-skill">
               <h3>{skill.skill}</h3>
-            </div>
-
-            <div class="skills-map-arrow" aria-hidden="true">
-              <span>→</span>
             </div>
 
             <div class="skills-map-output">

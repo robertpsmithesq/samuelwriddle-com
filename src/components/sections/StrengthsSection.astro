@@ -12,12 +12,12 @@ const strengths = ["Learner", "Focus", "Achiever", "Analytical", "Relator"];
 
     <div class="grid gap-10 md:grid-cols-5 md:gap-16">
       <ol
-        class="w-full max-w-xs space-y-5 md:col-span-2 md:justify-self-center md:self-center"
+        class="strengths-list mx-auto w-full max-w-xs space-y-5 md:col-span-2 md:mx-0 md:self-center md:justify-self-center"
         aria-label="CliftonStrengths themes"
       >
         {
           strengths.map((strength, index) => (
-            <li class="flex items-baseline gap-4 border-b border-[var(--color-border-soft)] pb-5 last:border-b-0 last:pb-0">
+            <li class="flex items-center gap-4 border-b border-[var(--color-border-soft)] pb-5 last:border-b-0 last:pb-0">
               <span class="mono text-sm text-[var(--color-accent)]">
                 {(index + 1).toString().padStart(2, "0")}
               </span>
