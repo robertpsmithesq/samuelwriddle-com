@@ -1,46 +1,31 @@
 ---
 import Container from "../ui/Container.astro";
 
-const skillColumns = [
+const skillMappings = [
   {
-    label: "Hard Skills",
-    skills: [
-      {
-        name: "Ruby on Rails",
-        description:
-          "Placeholder sentence about how I use Rails to build practical web applications with clear conventions. Placeholder sentence about the kind of product or team problems this helps me solve.",
-      },
-      {
-        name: "SQL",
-        description:
-          "Placeholder sentence about how I use SQL to understand relationships, answer questions, and validate assumptions. Placeholder sentence about how this supports reporting, operations, or decision-making.",
-      },
-      {
-        name: "Excel",
-        description:
-          "Placeholder sentence about how I use Excel for modeling, analysis, and quick operational problem solving. Placeholder sentence about how it helps me make messy work more understandable.",
-      },
-    ],
+    skill: "Critical Thinking",
+    output: "I tackle complex problems, and I break them down using real-world examples.",
+    prompt: "Ask me about my hackathon win."
   },
   {
-    label: "Soft Skills",
-    skills: [
-      {
-        name: "Critical Thinking",
-        description:
-          "Placeholder sentence about how I break ambiguous problems into smaller decisions that can move. Placeholder sentence about how I look for constraints, tradeoffs, and missing assumptions.",
-      },
-      {
-        name: "Attention to Detail",
-        description:
-          "Placeholder sentence about how I catch edge cases, inconsistencies, and rough edges early. Placeholder sentence about how that habit improves the work before it reaches someone else.",
-      },
-      {
-        name: "Reliability",
-        description:
-          "Placeholder sentence about how I follow through with steady communication and clean handoffs. Placeholder sentence about how I try to make work easier to trust when I am responsible for it.",
-      },
-    ],
+    skill: "Process Design",
+    output: "I separate vague processes into bite-sized stages, and I'm aware of bottlenecks.",
+    prompt: "Ask me about my budgeting app."
+  },
+  {
+    skill: "Domain Modeling",
+    output: "I know what functions belong where, and I'm tough on scope creep.",
+    prompt: "Ask me about my ViewComponent design patterns."
+  },
+  {
+    skill: "Planning & Execution",
+    output: "I orchestrate projects with a clear vision, and I deliver high-quality results.",
+    prompt: "Ask me about mock interviews."
+  },
+  {
+    skill: "Stakeholder Relationships",
+    output: "I enjoy getting to know my coworkers, and I go above and beyond to assist them.",
+    prompt: "Ask me about doing code reviews as a junior."
   },
 ];
 ---
@@ -53,24 +38,22 @@ const skillColumns = [
       </h2>
     </div>
 
-    <div class="skills-board" aria-label="Skills grouped by type">
+    <div class="skills-map" aria-label="Skills mapped to outcomes">
       {
-        skillColumns.map((column) => (
-          <article class="skills-panel">
-            <div class="skills-panel-heading">
-              <h3>{column.label}</h3>
+        skillMappings.map((skill) => (
+          <article class="skills-map-row">
+            <div class="skills-map-skill">
+              <h3>{skill.skill}</h3>
             </div>
 
-            <ul class="skills-tiles" aria-label={column.label}>
-              {column.skills.map((skill) => (
-                <li class="skills-cell">
-                  <div class="skills-cell-header">
-                    <h4 class="skills-cell-title">{skill.name}</h4>
-                  </div>
-                  <p class="skills-cell-description">{skill.description}</p>
-                </li>
-              ))}
-            </ul>
+            <div class="skills-map-arrow" aria-hidden="true">
+              <span>→</span>
+            </div>
+
+            <div class="skills-map-output">
+              <p class="skills-map-output-text">{skill.output}</p>
+              <p class="skills-map-output-prompt">{skill.prompt}</p>
+            </div>
           </article>
         ))
       }
