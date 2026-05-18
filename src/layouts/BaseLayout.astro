@@ -19,6 +19,8 @@ const {
 
 const darkThemeColor = "#111115";
 const lightThemeColor = "#ffffff";
+const fontStylesheetUrl =
+  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap";
 ---
 
 <!doctype html>
@@ -80,10 +82,16 @@ const lightThemeColor = "#ffffff";
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href={fontStylesheetUrl} />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href={fontStylesheetUrl}
       rel="stylesheet"
+      media="print"
+      onload="this.onload=null;this.media='all'"
     />
+    <noscript>
+      <link href={fontStylesheetUrl} rel="stylesheet" />
+    </noscript>
   </head>
   <body class="min-h-screen">
     <slot />
