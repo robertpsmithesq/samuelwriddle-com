@@ -1,43 +1,52 @@
-# Astro Starter Kit: Minimal
+# samuelwriddle.com
+
+Personal portfolio site for Sam Riddle. The MVP is a single-page Astro site with sections for intro, about, experience, projects, skills, strengths, education, and contact.
+
+## Stack
+
+- Astro
+- MDX content collections
+- Tailwind CSS
+- TypeScript
+- pnpm
+
+## Setup
+
+Requires Node `>=22.12.0`.
 
 ```sh
-pnpm create astro@latest -- --template minimal
+pnpm install
+pnpm dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The dev server runs at `http://localhost:4321`.
 
-## 🚀 Project Structure
+## Scripts
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```sh
+pnpm dev           # start local dev server
+pnpm build         # build production output to dist/
+pnpm preview       # preview the production build locally
+pnpm check         # run Astro/TypeScript checks
+pnpm format        # format the repo
+pnpm format:check  # check formatting without writing changes
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Content
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Most portfolio content lives in `src/content/`:
 
-Any static assets, like images, can be placed in the `public/` directory.
+- `experience/`
+- `projects/`
+- `education/`
 
-## 🧞 Commands
+Page sections and reusable UI live in `src/components/`. Global styles and tokens live in `src/styles/`.
 
-All commands are run from the root of the project, from a terminal:
+## Verify
 
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `pnpm install`         | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+Before shipping a change, run:
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```sh
+pnpm check
+pnpm build
+```
