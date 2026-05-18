@@ -1,0 +1,68 @@
+---
+import Button from "../components/ui/Button.astro";
+import Container from "../components/ui/Container.astro";
+import PageLayout from "../layouts/PageLayout.astro";
+---
+
+<PageLayout
+  title="404 | Sam Riddle"
+  description="The page you were looking for does not exist."
+  canonicalUrl="https://samuelwriddle.com/404"
+>
+  <section class="not-found px-4 py-20 md:px-8">
+    <Container class="fade-in delay-1">
+      <div class="not-found-shell">
+        <h1 class="not-found-title">Page not found</h1>
+
+        <p class="not-found-copy">
+          The page you are looking for does not exist or has been moved.
+        </p>
+
+        <div class="not-found-actions">
+          <Button href="/">Back to Home</Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+</PageLayout>
+
+<style>
+  .not-found {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    min-height: calc(100vh - 10rem);
+  }
+
+  .not-found-shell {
+    max-width: 34rem;
+    margin: 0 auto;
+  }
+
+  .not-found-kicker {
+    margin-bottom: 0.75rem;
+    color: var(--color-accent);
+    font-size: 0.875rem;
+  }
+
+  .not-found-title {
+    margin: 0 0 1rem;
+    color: var(--color-text-primary);
+    font-size: clamp(2.25rem, 7vw, 4rem);
+    font-weight: 700;
+    line-height: 1.05;
+  }
+
+  .not-found-copy {
+    margin: 0 auto 2rem;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .not-found-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+</style>
