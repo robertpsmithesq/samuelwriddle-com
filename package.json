@@ -10,6 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "start": "serve dist -l 3000",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "check": "astro check"
@@ -19,6 +20,7 @@
     "@astrojs/mdx": "^5.0.4",
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.1.9",
+    "serve": "^14.2.6",
     "tailwindcss": "^4.2.4",
     "typescript": "^6.0.3"
   },
