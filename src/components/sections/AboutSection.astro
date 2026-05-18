@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import Container from "../ui/Container.astro";
+import samPortrait from "../../assets/sam_riddle.jpg";
 ---
 
 <section id="about" class="px-4 py-20 md:px-8">
@@ -13,11 +15,20 @@ import Container from "../ui/Container.astro";
           <div
             class="overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl shadow-black/20"
           >
-            <img
-              src="/assets/sam_riddle.jpg"
+            <Image
+              src={samPortrait}
               alt="Sam Riddle"
+              width={896}
+              height={1120}
+              widths={[320, 384, 448, 640, 768, 896]}
+              sizes="(min-width: 768px) 448px, (min-width: 416px) 384px, calc(100vw - 2rem)"
+              format="webp"
+              quality={82}
+              fit="cover"
+              position="68% top"
+              loading="lazy"
+              decoding="async"
               class="aspect-[4/5] h-full w-full object-cover"
-              style="object-position: 68% top;"
             />
           </div>
           <figcaption
