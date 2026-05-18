@@ -63,10 +63,10 @@ const fontStylesheetUrl =
       media="(prefers-color-scheme: dark)"
     />
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta
       name="theme-color"
@@ -94,11 +94,24 @@ const fontStylesheetUrl =
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="style" href={fontStylesheetUrl} />
     <link
+      data-font-stylesheet
       href={fontStylesheetUrl}
       rel="stylesheet"
       media="print"
-      onload="this.onload=null;this.media='all'"
     />
+    <script is:inline>
+      const fontStylesheet = document.querySelector("[data-font-stylesheet]");
+
+      if (fontStylesheet instanceof HTMLLinkElement) {
+        fontStylesheet.addEventListener(
+          "load",
+          () => {
+            fontStylesheet.media = "all";
+          },
+          { once: true },
+        );
+      }
+    </script>
     <noscript>
       <link href={fontStylesheetUrl} rel="stylesheet" />
     </noscript>
