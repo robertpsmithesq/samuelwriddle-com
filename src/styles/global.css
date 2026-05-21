@@ -141,6 +141,33 @@ body {
   color: var(--color-text-primary);
 }
 
+.hero-layout {
+  display: grid;
+  align-items: center;
+}
+
+.hero-copy {
+  min-width: 0;
+}
+
+.hero-mark {
+  display: none;
+  width: min(34vw, 24rem);
+  aspect-ratio: 1;
+  justify-self: end;
+  background:
+    radial-gradient(
+      circle,
+      rgb(var(--color-accent-rgb) / 0.18),
+      transparent 68%
+    ),
+    var(--color-accent);
+  -webkit-mask: url("/favicon-red.svg") center / contain no-repeat;
+  mask: url("/favicon-red.svg") center / contain no-repeat;
+  opacity: 0.9;
+  filter: drop-shadow(0 2rem 4rem rgb(var(--color-accent-rgb) / 0.18));
+}
+
 .card {
   background: var(--color-surface-soft);
   border: 1px solid var(--color-border-soft);
@@ -660,6 +687,15 @@ body {
 }
 
 @media (min-width: 768px) {
+  .hero-layout {
+    grid-template-columns: minmax(0, 1.35fr) minmax(14rem, 0.65fr);
+    gap: 4rem;
+  }
+
+  .hero-mark {
+    display: block;
+  }
+
   .project-feature {
     grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
     gap: 4rem;
