@@ -61,3 +61,109 @@ const skillMappings = [
     </div>
   </Container>
 </section>
+
+<style>
+  .skills-map {
+    display: grid;
+    gap: 1.75rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .skills-map-row {
+    position: relative;
+    display: grid;
+    gap: 0.875rem;
+    align-items: center;
+    padding: 1.5rem;
+    text-align: center;
+    background:
+      linear-gradient(
+        135deg,
+        rgb(var(--color-accent-rgb) / 0.12),
+        transparent 42%
+      ),
+      linear-gradient(180deg, var(--color-surface-soft), transparent),
+      var(--color-background);
+    border: 1px solid var(--color-border-soft);
+    border-radius: 1rem;
+  }
+
+  .skills-map-row:last-child {
+    padding-bottom: 1.5rem;
+  }
+
+  .skills-map-skill h3 {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding-bottom: 0.55rem;
+    color: var(--color-text-primary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  .skills-map-skill h3::after {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: min(7rem, 78%);
+    height: 1px;
+    content: "";
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-accent),
+      transparent
+    );
+    opacity: 0.8;
+    transform: translateX(-50%);
+    box-shadow: 0 0 12px rgb(var(--color-accent-rgb) / 0.34);
+  }
+
+  .skills-map-output-text {
+    max-width: 34rem;
+    margin: 0 auto;
+    font-size: 1.125rem;
+    line-height: 1.625;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .skills-map-output-prompt {
+    max-width: 34rem;
+    margin: 0.35rem auto 0;
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.45;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  @media (min-width: 768px) {
+    .skills-map {
+      gap: 1.25rem;
+      width: 60vw;
+      max-width: 100%;
+    }
+
+    .skills-map-row {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 2rem;
+      padding: 1.75rem 2rem;
+      text-align: left;
+    }
+
+    .skills-map-skill {
+      text-align: center;
+    }
+
+    .skills-map-output-text,
+    .skills-map-output-prompt {
+      text-align: center;
+    }
+  }
+</style>

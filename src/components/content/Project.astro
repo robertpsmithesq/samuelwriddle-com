@@ -34,5 +34,61 @@ const {
     </div>
   </div>
 
-  <ProjectCard name={name} tag={tag} href={href} image={image} />
+  <div class="project-feature-card">
+    <ProjectCard name={name} tag={tag} href={href} image={image} />
+  </div>
 </article>
+
+<style>
+  .project-feature {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .project-feature-copy,
+  .project-feature-card {
+    min-width: 0;
+  }
+
+  .project-feature-copy h3 {
+    margin: 0 0 1rem;
+    color: var(--color-text-primary);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .project-feature-copy > p:last-of-type {
+    max-width: 38rem;
+    color: var(--color-text-primary);
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+
+  .project-feature-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    margin-top: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .project-feature {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 4rem;
+    }
+
+    .project-feature--reversed {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    }
+
+    .project-feature--reversed .project-feature-copy {
+      order: 2;
+    }
+
+    .project-feature--reversed .project-feature-card {
+      order: 1;
+    }
+  }
+</style>

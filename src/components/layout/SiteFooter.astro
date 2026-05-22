@@ -9,3 +9,22 @@ import Container from "../ui/Container.astro";
     <p class="site-footer-text text-sm">&copy; 2026 Sam Riddle.</p>
   </Container>
 </footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-border-soft);
+  }
+
+  .site-footer-mark {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--color-accent);
+    -webkit-mask: url("/favicon-red.svg") center / contain no-repeat;
+    mask: url("/favicon-red.svg") center / contain no-repeat;
+  }
+
+  .site-footer-text {
+    color: var(--color-text-tertiary);
+  }
+</style>

@@ -22,9 +22,7 @@ const {
   isCurrent = false,
 } = Astro.props;
 
-const cardClass = ["timeline-card", isCurrent && "timeline-card--current"]
-  .filter(Boolean)
-  .join(" ");
+const cardClass = "relative";
 ---
 
 <article
@@ -40,7 +38,7 @@ const cardClass = ["timeline-card", isCurrent && "timeline-card--current"]
     <span></span>
   </div>
 
-  <Card class={cardClass}>
+  <Card class={cardClass} highlighted={isCurrent}>
     <header
       class="mb-2 flex flex-col gap-2 md:flex-row md:items-start md:justify-between"
     >
@@ -68,3 +66,53 @@ const cardClass = ["timeline-card", isCurrent && "timeline-card--current"]
     </div>
   </Card>
 </article>
+
+<style>
+  .timeline-dot {
+    display: grid;
+    place-items: center;
+    background: var(--color-background);
+    border: 1px solid var(--color-accent-strong);
+    box-shadow:
+      0 0 0 4px var(--color-accent-soft),
+      0 0 24px rgb(239 68 68 / 12%);
+  }
+
+  .timeline-dot span {
+    width: 0.375rem;
+    height: 0.375rem;
+    background: var(--color-accent);
+    border-radius: 999px;
+    box-shadow: 0 0 12px rgb(239 68 68 / 55%);
+  }
+
+  .timeline-item--current .timeline-dot {
+    border-color: var(--color-accent);
+    box-shadow:
+      0 0 0 4px var(--color-accent-soft),
+      0 0 0 8px rgb(239 68 68 / 8%),
+      0 0 32px rgb(239 68 68 / 22%);
+  }
+
+  .timeline-current-badge {
+    color: var(--color-accent);
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-accent-strong);
+  }
+
+  .impact-list li {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .impact-list li::before {
+    position: absolute;
+    top: 0.7em;
+    left: 0;
+    width: 0.5rem;
+    height: 1px;
+    content: "";
+    background: var(--color-text-primary);
+    box-shadow: 0 0 10px rgb(239 68 68 / 45%);
+  }
+</style>
