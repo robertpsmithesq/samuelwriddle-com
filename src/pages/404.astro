@@ -10,8 +10,8 @@ import PageLayout from "../layouts/PageLayout.astro";
   canonicalUrl="https://samuelwriddle.com/404"
 >
   <section class="not-found px-4 py-20 md:px-8">
-    <Container class="fade-in delay-1">
-      <div class="not-found-shell">
+    <Container>
+      <div class="not-found-shell fade-in delay-1">
         <h1 class="not-found-title">Page not found</h1>
 
         <p class="not-found-copy">
@@ -64,5 +64,34 @@ import PageLayout from "../layouts/PageLayout.astro";
     display: flex;
     justify-content: center;
     gap: 1rem;
+  }
+
+  .fade-in {
+    opacity: 0;
+    animation: fadeIn var(--duration-fade) var(--ease-standard) forwards;
+  }
+
+  .delay-1 {
+    animation-delay: 0.1s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in {
+      opacity: 1;
+      animation: none;
+      transform: none;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>
