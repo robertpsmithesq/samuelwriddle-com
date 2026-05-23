@@ -7,101 +7,46 @@ interface Props {
 }
 
 const { name, tag, href, image } = Astro.props;
+
+const cardClasses =
+  "block w-full min-w-0 overflow-hidden rounded-2xl border border-line-soft bg-surface text-inherit no-underline backdrop-blur-panel transition hover:-translate-y-0.5 hover:border-brand-strong hover:shadow-card-hover";
+const previewClasses =
+  "project-card-preview grid aspect-[16/10] min-h-72 w-full place-items-center overflow-hidden border-b border-line-soft p-8";
+const fallbackClasses =
+  "block max-w-full text-center text-[clamp(1.75rem,4vw,3.5rem)] leading-none font-medium text-secondary italic opacity-[0.88] [overflow-wrap:anywhere] [text-wrap:balance]";
+const imageClasses =
+  "block h-auto max-h-full w-[min(100%,28rem)] object-contain";
+const captionClasses =
+  "flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 p-5";
 ---
 
 <a
   href={href}
   target="_blank"
   rel="noopener noreferrer"
-  class="project-card card card--interactive"
+  class={cardClasses}
   aria-label={`Open ${name}`}
 >
-  <div class="project-card-preview" aria-hidden="true">
-    {image ? <img src={image} alt="" loading="lazy" /> : <span>{name}</span>}
+  <div class={previewClasses} aria-hidden="true">
+    {
+      image ? (
+        <img class={imageClasses} src={image} alt="" loading="lazy" />
+      ) : (
+        <span class={fallbackClasses}>{name}</span>
+      )
+    }
   </div>
-  <div class="project-card-caption">
-    <p>{name}</p>
-    <p>{tag}</p>
+  <div class={captionClasses}>
+    <p class="font-bold">{name}</p>
+    <p class="text-secondary text-[0.95rem]">{tag}</p>
   </div>
 </a>
 
 <style>
-  .card {
-    background: var(--color-surface-soft);
-    border: 1px solid var(--color-border-soft);
-    backdrop-filter: blur(var(--blur-soft));
-    transition: var(--transition-base);
-  }
-
-  .card--interactive:hover {
-    border-color: var(--color-accent-strong);
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-2px);
-  }
-
-  .project-card {
-    display: block;
-    width: 100%;
-    min-width: 0;
-    overflow: hidden;
-    color: inherit;
-    text-decoration: none;
-    border-radius: 1rem;
-  }
-
   .project-card-preview {
-    display: grid;
-    width: 100%;
-    box-sizing: border-box;
-    aspect-ratio: 16 / 10;
-    min-height: 18rem;
-    padding: 2rem;
-    overflow: hidden;
-    place-items: center;
     background:
       linear-gradient(135deg, rgb(239 68 68 / 12%), transparent 42%),
       linear-gradient(180deg, var(--color-surface-soft), transparent),
       var(--color-background);
-    border-bottom: 1px solid var(--color-border-soft);
-  }
-
-  .project-card-preview span {
-    display: block;
-    max-width: 100%;
-    overflow-wrap: anywhere;
-    color: var(--color-text-secondary);
-    font-size: clamp(1.75rem, 4vw, 3.5rem);
-    font-style: italic;
-    font-weight: 500;
-    line-height: 1;
-    text-align: center;
-    text-wrap: balance;
-    opacity: 0.88;
-  }
-
-  .project-card-preview img {
-    display: block;
-    width: min(100%, 28rem);
-    max-height: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-
-  .project-card-caption {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1rem;
-    align-items: baseline;
-    justify-content: space-between;
-    padding: 1.25rem;
-  }
-
-  .project-card-caption p:first-child {
-    font-weight: 700;
-  }
-
-  .project-card-caption p:last-child {
-    color: var(--color-text-secondary);
-    font-size: 0.95rem;
   }
 </style>

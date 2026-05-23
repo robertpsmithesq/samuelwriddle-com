@@ -1,0 +1,37 @@
+@theme inline {
+  --font-sans: var(--font-family-sans);
+  --font-mono: var(--font-family-mono);
+
+  --color-canvas: var(--color-background);
+  --color-canvas-overlay: var(--color-background-overlay);
+  --color-menu: var(--color-menu-background);
+  --color-surface: var(--color-surface-soft);
+  --color-badge-solid: var(--badge-solid-color);
+
+  --color-primary: var(--color-text-primary);
+  --color-secondary: var(--color-text-secondary);
+  --color-tertiary: var(--color-text-tertiary);
+
+  --color-brand: var(--color-accent);
+  --color-brand-light: var(--color-accent-light);
+  --color-brand-dark: var(--color-accent-dark);
+  --color-brand-soft: var(--color-accent-soft);
+  --color-brand-medium: var(--color-accent-medium);
+  --color-brand-strong: var(--color-accent-strong);
+
+  --color-line-soft: var(--color-border-soft);
+  --color-line-medium: var(--color-border-medium);
+  --color-line-strong: var(--color-border-strong);
+
+  --blur-panel: var(--blur-soft);
+  --shadow-card-hover: var(--card-hover-shadow);
+  --shadow-card-highlight:
+    0 0 0 1px rgb(239 68 68 / 8%), 0 18px 48px rgb(0 0 0 / 22%);
+  --shadow-accent: var(--accent-shadow);
+  --shadow-timeline-dot:
+    0 0 0 4px var(--color-accent-soft), 0 0 24px rgb(239 68 68 / 12%);
+  --shadow-timeline-dot-current:
+    0 0 0 4px var(--color-accent-soft), 0 0 0 8px rgb(239 68 68 / 8%),
+    0 0 32px rgb(239 68 68 / 22%);
+  --shadow-timeline-dot-inner: 0 0 12px rgb(239 68 68 / 55%);
+}

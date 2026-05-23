@@ -11,22 +11,32 @@ const navItems = [
   { href: "/#education", label: "Education" },
   { href: "/#contact", label: "Contact" },
 ];
+
+const headerClasses =
+  "sticky top-0 z-50 border-b border-line-soft bg-canvas-overlay px-4 py-4 backdrop-blur-panel md:px-8";
+const navLinkClasses =
+  "nav-link desktop-nav-link relative text-secondary transition-colors hover:text-brand";
 ---
 
-<header class="sticky-nav px-4 py-4 md:px-8">
+<header class={headerClasses}>
   <Container>
     <nav
       class="flex items-center justify-between"
       aria-label="Primary navigation"
     >
-      <a href="/" class="site-logo" aria-label="Sam Riddle home">
-        <span aria-hidden="true"></span>
+      <a
+        href="/"
+        class="inline-flex items-center justify-center"
+        aria-label="Sam Riddle home"
+      >
+        <span class="site-logo-mark bg-brand block h-8 w-8" aria-hidden="true"
+        ></span>
       </a>
 
       <div class="hidden gap-6 text-sm md:flex">
         {
           navItems.map((item) => (
-            <a href={item.href} class="nav-link desktop-nav-link">
+            <a href={item.href} class={navLinkClasses}>
               {item.label}
             </a>
           ))
@@ -39,34 +49,9 @@ const navItems = [
 </header>
 
 <style>
-  .sticky-nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background-color: var(--color-background-overlay);
-    border-bottom: 1px solid var(--color-border-soft);
-    backdrop-filter: blur(var(--blur-soft));
-  }
-
-  .site-logo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .site-logo span {
-    display: block;
-    width: 2rem;
-    height: 2rem;
-    background-color: var(--color-accent);
+  .site-logo-mark {
     -webkit-mask: url("/favicon-red.svg") center / contain no-repeat;
     mask: url("/favicon-red.svg") center / contain no-repeat;
-  }
-
-  .nav-link {
-    position: relative;
-    color: var(--color-text-secondary);
-    transition: color var(--duration-fast) var(--ease-standard);
   }
 
   .desktop-nav-link::after {
@@ -89,7 +74,6 @@ const navItems = [
     left: 0;
   }
 
-  .nav-link:hover,
   .nav-link.active {
     color: var(--color-accent);
   }

@@ -15,10 +15,15 @@ const {
   ...attrs
 } = Astro.props;
 
-const variantClass = variant === "secondary" ? "btn-secondary" : "btn-primary";
+const variantClasses = {
+  primary: "bg-brand text-white transition hover:bg-brand-dark",
+  secondary:
+    "border border-line-strong bg-transparent text-primary transition hover:border-primary hover:bg-surface hover:text-primary",
+};
+
 const classes = [
   "inline-flex items-center justify-center rounded-lg px-6 py-3 font-medium",
-  variantClass,
+  variantClasses[variant],
   className,
 ];
 ---
@@ -34,28 +39,3 @@ const classes = [
     </button>
   )
 }
-
-<style>
-  .btn-primary {
-    color: var(--color-white);
-    background: var(--color-accent);
-    transition: var(--transition-fast);
-  }
-
-  .btn-primary:hover {
-    background: var(--color-accent-dark);
-  }
-
-  .btn-secondary {
-    color: var(--color-text-primary);
-    background: transparent;
-    border: 1px solid var(--color-border-strong);
-    transition: var(--transition-fast);
-  }
-
-  .btn-secondary:hover {
-    color: var(--color-text-primary);
-    background: var(--color-surface-soft);
-    border-color: var(--color-text-primary);
-  }
-</style>

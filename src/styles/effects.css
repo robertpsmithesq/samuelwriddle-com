@@ -3,14 +3,6 @@ html {
   overflow-x: hidden;
 }
 
-.mono {
-  font-family: var(--font-family-mono);
-}
-
-.accent-red {
-  color: var(--color-accent);
-}
-
 ::-webkit-scrollbar {
   width: 8px;
 }

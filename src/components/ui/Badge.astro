@@ -10,36 +10,13 @@ const { class: className, interactive = false, solid = false } = Astro.props;
 
 <span
   class:list={[
-    "tech-badge rounded-lg px-3 py-1 text-sm",
+    "border-line-medium bg-line-soft text-primary rounded-lg border px-3 py-1 text-sm transition",
     {
-      "tech-badge--interactive": interactive,
-      "tech-badge--solid": solid,
+      "bg-badge-solid": solid,
+      "hover:border-brand hover:text-brand hover:-translate-y-px": interactive,
     },
     className,
   ]}
 >
   <slot />
 </span>
-
-<style>
-  .tech-badge {
-    color: var(--color-text-primary);
-    background: var(--color-border-soft);
-    border: 1px solid var(--color-border-medium);
-    transition: var(--transition-fast);
-  }
-
-  .tech-badge--solid {
-    background: rgb(43 43 45);
-  }
-
-  :global(.light-mode) .tech-badge--solid {
-    background: rgb(239 239 239);
-  }
-
-  .tech-badge--interactive:hover {
-    color: var(--color-accent);
-    border-color: var(--color-accent);
-    transform: translateY(-1px);
-  }
-</style>

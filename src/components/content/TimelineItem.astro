@@ -22,23 +22,21 @@ const {
   isCurrent = false,
 } = Astro.props;
 
-const cardClass = "relative";
+const dotClasses = [
+  "absolute top-8 left-1 grid h-4 w-4 place-items-center rounded-full border bg-canvas md:left-6",
+  isCurrent
+    ? "border-brand shadow-timeline-dot-current"
+    : "border-brand-strong shadow-timeline-dot",
+];
 ---
 
-<article
-  class:list={[
-    "timeline-item relative pl-10 md:pl-20",
-    { "timeline-item--current": isCurrent },
-  ]}
->
-  <div
-    class="timeline-dot absolute top-8 left-1 h-4 w-4 rounded-full md:left-6"
-    aria-hidden="true"
-  >
-    <span></span>
+<article class="relative pl-10 md:pl-20">
+  <div class:list={dotClasses} aria-hidden="true">
+    <span class="bg-brand shadow-timeline-dot-inner h-1.5 w-1.5 rounded-full"
+    ></span>
   </div>
 
-  <Card class={cardClass} highlighted={isCurrent}>
+  <Card class="relative" highlighted={isCurrent}>
     <header
       class="mb-2 flex flex-col gap-2 md:flex-row md:items-start md:justify-between"
     >
@@ -46,7 +44,7 @@ const cardClass = "relative";
         <h3 class="text-xl font-semibold">{title}</h3>
         {
           isCurrent && (
-            <span class="timeline-current-badge mono rounded-full px-2.5 py-1 text-xs">
+            <span class="border-brand-strong bg-brand-soft text-brand rounded-full border px-2.5 py-1 font-mono text-xs">
               Current
             </span>
           )
@@ -68,38 +66,6 @@ const cardClass = "relative";
 </article>
 
 <style>
-  .timeline-dot {
-    display: grid;
-    place-items: center;
-    background: var(--color-background);
-    border: 1px solid var(--color-accent-strong);
-    box-shadow:
-      0 0 0 4px var(--color-accent-soft),
-      0 0 24px rgb(239 68 68 / 12%);
-  }
-
-  .timeline-dot span {
-    width: 0.375rem;
-    height: 0.375rem;
-    background: var(--color-accent);
-    border-radius: 999px;
-    box-shadow: 0 0 12px rgb(239 68 68 / 55%);
-  }
-
-  .timeline-item--current .timeline-dot {
-    border-color: var(--color-accent);
-    box-shadow:
-      0 0 0 4px var(--color-accent-soft),
-      0 0 0 8px rgb(239 68 68 / 8%),
-      0 0 32px rgb(239 68 68 / 22%);
-  }
-
-  .timeline-current-badge {
-    color: var(--color-accent);
-    background: var(--color-accent-soft);
-    border: 1px solid var(--color-accent-strong);
-  }
-
   .impact-list li {
     position: relative;
     padding-left: 1.25rem;

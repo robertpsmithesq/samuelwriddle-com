@@ -14,35 +14,14 @@ const {
 
 <div
   class:list={[
-    "card rounded-xl p-6",
+    "border-line-soft bg-surface backdrop-blur-panel rounded-xl border p-6 transition",
     {
-      "card--highlighted": highlighted,
-      "card--interactive": interactive,
+      "border-brand-strong shadow-card-highlight": highlighted,
+      "hover:border-brand-strong hover:shadow-card-hover hover:-translate-y-0.5":
+        interactive,
     },
     className,
   ]}
 >
   <slot />
 </div>
-
-<style>
-  .card {
-    background: var(--color-surface-soft);
-    border: 1px solid var(--color-border-soft);
-    backdrop-filter: blur(var(--blur-soft));
-    transition: var(--transition-base);
-  }
-
-  .card--interactive:hover {
-    border-color: var(--color-accent-strong);
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-2px);
-  }
-
-  .card--highlighted {
-    border-color: var(--color-accent-strong);
-    box-shadow:
-      0 0 0 1px rgb(239 68 68 / 8%),
-      0 18px 48px rgb(0 0 0 / 22%);
-  }
-</style>

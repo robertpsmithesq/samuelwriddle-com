@@ -2,28 +2,26 @@
 import Container from "../ui/Container.astro";
 
 const strengths = ["Learner", "Focus", "Achiever", "Analytical", "Relator"];
+
+const strengthsListClasses =
+  "strengths-list mx-auto w-full max-w-xs space-y-5 rounded-2xl border border-line-soft p-6 md:col-span-2 md:mx-0 md:self-center md:justify-self-center";
 ---
 
 <section id="strengths" class="px-4 py-20 md:px-8">
   <Container>
     <h2 class="mb-12 text-3xl font-bold">
-      My <span class="accent-red">Strengths</span>
+      My <span class="text-brand">Strengths</span>
     </h2>
 
     <div class="grid gap-10 md:grid-cols-5 md:gap-16">
-      <ol
-        class="strengths-list mx-auto w-full max-w-xs space-y-5 md:col-span-2 md:mx-0 md:self-center md:justify-self-center"
-        aria-label="CliftonStrengths themes"
-      >
+      <ol class={strengthsListClasses} aria-label="CliftonStrengths themes">
         {
           strengths.map((strength, index) => (
-            <li class="flex items-center gap-4 border-b border-[var(--color-border-soft)] pb-5 last:border-b-0 last:pb-0">
-              <span class="mono text-sm text-[var(--color-accent)]">
+            <li class="border-line-soft flex items-center gap-4 border-b pb-5 last:border-b-0 last:pb-0">
+              <span class="text-brand font-mono text-sm">
                 {(index + 1).toString().padStart(2, "0")}
               </span>
-              <span class="text-xl font-semibold text-[var(--color-text-primary)]">
-                {strength}
-              </span>
+              <span class="text-primary text-xl font-semibold">{strength}</span>
             </li>
           ))
         }
@@ -59,7 +57,6 @@ const strengths = ["Learner", "Focus", "Achiever", "Analytical", "Relator"];
 
 <style>
   .strengths-list {
-    padding: 1.5rem;
     background:
       linear-gradient(
         135deg,
@@ -68,7 +65,5 @@ const strengths = ["Learner", "Focus", "Achiever", "Analytical", "Relator"];
       ),
       linear-gradient(180deg, var(--color-surface-soft), transparent),
       var(--color-background);
-    border: 1px solid var(--color-border-soft);
-    border-radius: 1rem;
   }
 </style>

@@ -37,12 +37,15 @@ const toDateLabel = (startDate: Date, endDate: Date | "Present") => {
 
 const visibleExperiences = sortedExperiences.slice(0, 2);
 const expandableExperiences = sortedExperiences.slice(2);
+
+const revealButtonClasses =
+  "timeline-reveal-pill inline-flex min-h-10 items-center justify-center gap-3 rounded-full border border-line-medium bg-canvas-overlay px-4 py-2.5 text-sm text-primary backdrop-blur-panel transition-[color,border-color,transform] [font:inherit] hover:-translate-y-px hover:border-primary hover:bg-surface hover:text-primary";
 ---
 
 <section id="experience" class="px-4 py-20 md:px-8">
   <Container class="max-w-6xl">
     <h2 class="mb-12 text-3xl font-bold">
-      My <span class="accent-red">Experience</span>
+      My <span class="text-brand">Experience</span>
     </h2>
 
     <div class="mx-auto w-full md:w-[60vw] md:max-w-full">
@@ -66,9 +69,9 @@ const expandableExperiences = sortedExperiences.slice(2);
 
         {
           expandableExperiences.length > 0 && (
-            <div class="timeline-reveal" data-timeline-reveal>
+            <div class="timeline-reveal relative pt-2" data-timeline-reveal>
               <button
-                class="timeline-reveal-pill timeline-reveal-pill--top"
+                class={`${revealButtonClasses} timeline-reveal-pill--top absolute top-7 left-1/2 z-[2] -translate-x-1/2 hover:-translate-x-1/2`}
                 type="button"
                 aria-expanded="false"
                 data-timeline-expand
@@ -76,7 +79,10 @@ const expandableExperiences = sortedExperiences.slice(2);
                 Show earlier experience
               </button>
 
-              <div class="timeline-reveal-items" data-timeline-reveal-items>
+              <div
+                class="timeline-reveal-items overflow-hidden opacity-100"
+                data-timeline-reveal-items
+              >
                 <div class="space-y-12">
                   {expandableExperiences.map((experience) => (
                     <TimelineItem
@@ -96,7 +102,7 @@ const expandableExperiences = sortedExperiences.slice(2);
               </div>
 
               <button
-                class="timeline-reveal-pill timeline-reveal-pill--bottom"
+                class={`${revealButtonClasses} timeline-reveal-pill--bottom mx-auto mt-8`}
                 type="button"
                 aria-expanded="true"
                 data-timeline-collapse
@@ -153,16 +159,6 @@ const expandableExperiences = sortedExperiences.slice(2);
 </script>
 
 <style>
-  .timeline-reveal {
-    position: relative;
-    padding-top: 0.5rem;
-  }
-
-  .timeline-reveal-items {
-    overflow: hidden;
-    opacity: 1;
-  }
-
   .timeline-reveal--ready .timeline-reveal-items {
     max-height: 6rem;
     opacity: 0.5;
@@ -177,49 +173,12 @@ const expandableExperiences = sortedExperiences.slice(2);
     mask-image: none;
   }
 
-  .timeline-reveal-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    min-height: 2.5rem;
-    padding: 0.625rem 1rem;
-    color: var(--color-text-primary);
-    font: inherit;
-    font-size: 0.875rem;
-    background: var(--color-background-overlay);
-    border: 1px solid var(--color-border-medium);
-    border-radius: 999px;
-    backdrop-filter: blur(var(--blur-soft));
-    transition:
-      color var(--duration-fast) var(--ease-standard),
-      border-color var(--duration-fast) var(--ease-standard),
-      transform var(--duration-fast) var(--ease-standard);
-  }
-
-  .timeline-reveal-pill:hover {
-    color: var(--color-text-primary);
-    background: var(--color-surface-soft);
-    border-color: var(--color-text-primary);
-    transform: translateY(-1px);
-  }
-
   .timeline-reveal-pill--top {
-    position: absolute;
-    top: 1.75rem;
-    left: 50%;
-    z-index: 2;
     display: none;
-    transform: translateX(-50%);
-  }
-
-  .timeline-reveal-pill--top:hover {
-    transform: translateX(-50%) translateY(-1px);
   }
 
   .timeline-reveal-pill--bottom {
     display: none;
-    margin: 2rem auto 0;
   }
 
   .timeline-reveal--ready:not(.timeline-reveal--open)
