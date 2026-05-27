@@ -10,10 +10,10 @@ const { class: className, interactive = false, solid = false } = Astro.props;
 
 <span
   class:list={[
-    "tech-badge rounded-lg px-3 py-1 text-sm",
+    "border-line-medium bg-line-soft text-primary rounded-lg border px-3 py-1 text-sm transition",
     {
-      "tech-badge--interactive": interactive,
-      "tech-badge--solid": solid,
+      "bg-badge-solid": solid,
+      "hover:border-brand hover:text-brand hover:-translate-y-px": interactive,
     },
     className,
   ]}

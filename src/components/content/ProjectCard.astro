@@ -7,20 +7,46 @@ interface Props {
 }
 
 const { name, tag, href, image } = Astro.props;
+
+const cardClasses =
+  "block w-full min-w-0 overflow-hidden rounded-2xl border border-line-soft bg-surface text-inherit no-underline backdrop-blur-panel transition hover:-translate-y-0.5 hover:border-brand-strong hover:shadow-card-hover";
+const previewClasses =
+  "project-card-preview grid aspect-[16/10] min-h-72 w-full place-items-center overflow-hidden border-b border-line-soft p-8";
+const fallbackClasses =
+  "block max-w-full text-center text-[clamp(1.75rem,4vw,3.5rem)] leading-none font-medium text-secondary italic opacity-[0.88] [overflow-wrap:anywhere] [text-wrap:balance]";
+const imageClasses =
+  "block h-auto max-h-full w-[min(100%,28rem)] object-contain";
+const captionClasses =
+  "flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 p-5";
 ---
 
 <a
   href={href}
   target="_blank"
   rel="noopener noreferrer"
-  class="project-card card card--interactive"
+  class={cardClasses}
   aria-label={`Open ${name}`}
 >
-  <div class="project-card-preview" aria-hidden="true">
-    {image ? <img src={image} alt="" loading="lazy" /> : <span>{name}</span>}
+  <div class={previewClasses} aria-hidden="true">
+    {
+      image ? (
+        <img class={imageClasses} src={image} alt="" loading="lazy" />
+      ) : (
+        <span class={fallbackClasses}>{name}</span>
+      )
+    }
   </div>
-  <div class="project-card-caption">
-    <p>{name}</p>
-    <p>{tag}</p>
+  <div class={captionClasses}>
+    <p class="font-bold">{name}</p>
+    <p class="text-secondary text-[0.95rem]">{tag}</p>
   </div>
 </a>
+
+<style>
+  .project-card-preview {
+    background:
+      linear-gradient(135deg, rgb(239 68 68 / 12%), transparent 42%),
+      linear-gradient(180deg, var(--color-surface-soft), transparent),
+      var(--color-background);
+  }
+</style>

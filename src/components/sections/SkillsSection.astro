@@ -33,27 +33,38 @@ const skillMappings = [
     prompt: "Ask me about doing code reviews as a junior.",
   },
 ];
+
+const mapClasses =
+  "mx-auto grid w-full gap-7 md:w-[60vw] md:max-w-full md:gap-5";
+const rowClasses =
+  "skills-map-row relative grid items-center gap-3.5 rounded-2xl border border-line-soft p-6 text-center md:grid-cols-2 md:gap-8 md:p-8 md:text-left";
+const headingClasses =
+  "relative m-0 inline-block pb-[0.55rem] text-xl leading-[1.15] font-bold text-primary [text-wrap:balance]";
+const outputTextClasses =
+  "mx-auto max-w-[34rem] text-center text-lg leading-[1.625] [text-wrap:balance]";
+const outputPromptClasses =
+  "mx-auto mt-[0.35rem] max-w-[34rem] text-center text-[0.95rem] leading-[1.45] text-secondary italic [text-wrap:balance]";
 ---
 
 <section id="skills" class="px-4 py-20 md:px-8">
   <Container>
     <div class="mb-12 max-w-2xl">
       <h2 class="text-3xl font-bold">
-        My <span class="accent-red">Skills</span>
+        My <span class="text-brand">Skills</span>
       </h2>
     </div>
 
-    <div class="skills-map" aria-label="Skills mapped to outcomes">
+    <div class={mapClasses} aria-label="Skills mapped to outcomes">
       {
         skillMappings.map((skill) => (
-          <article class="skills-map-row">
-            <div class="skills-map-skill">
-              <h3>{skill.skill}</h3>
+          <article class={rowClasses}>
+            <div class="text-center">
+              <h3 class={headingClasses}>{skill.skill}</h3>
             </div>
 
-            <div class="skills-map-output">
-              <p class="skills-map-output-text">{skill.output}</p>
-              <p class="skills-map-output-prompt">{skill.prompt}</p>
+            <div>
+              <p class={outputTextClasses}>{skill.output}</p>
+              <p class={outputPromptClasses}>{skill.prompt}</p>
             </div>
           </article>
         ))
@@ -61,3 +72,34 @@ const skillMappings = [
     </div>
   </Container>
 </section>
+
+<style>
+  .skills-map-row {
+    background:
+      linear-gradient(
+        135deg,
+        rgb(var(--color-accent-rgb) / 0.12),
+        transparent 42%
+      ),
+      linear-gradient(180deg, var(--color-surface-soft), transparent),
+      var(--color-background);
+  }
+
+  h3::after {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: min(7rem, 78%);
+    height: 1px;
+    content: "";
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-accent),
+      transparent
+    );
+    opacity: 0.8;
+    transform: translateX(-50%);
+    box-shadow: 0 0 12px rgb(var(--color-accent-rgb) / 0.34);
+  }
+</style>

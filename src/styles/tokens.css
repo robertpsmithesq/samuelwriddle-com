@@ -49,6 +49,7 @@
   --color-text-tertiary: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.52);
 
   --color-surface-soft: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.05);
+  --badge-solid-color: rgb(43 43 45);
   --color-border-soft: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.1);
   --color-border-medium: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.2);
   --color-border-strong: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.3);
@@ -66,8 +67,8 @@
   --effect-orb-neutral-start: var(--color-gray-700);
   --effect-orb-neutral-end: var(--color-gray-400);
 
-  --shadow-accent: 0 4px 12px var(--color-accent-medium);
-  --shadow-card-hover: 0 8px 24px rgb(var(--color-gray-900-rgb) / 0.1);
+  --accent-shadow: 0 4px 12px var(--color-accent-medium);
+  --card-hover-shadow: 0 8px 24px rgb(var(--color-gray-900-rgb) / 0.1);
   --focus-ring-accent: 0 0 0 3px var(--color-accent-soft);
 
   --duration-fast: 0.2s;
@@ -106,6 +107,7 @@
   --color-accent-dark: var(--color-red-900);
 
   --color-surface-soft: rgb(var(--color-gray-900-rgb) / 0.03);
+  --badge-solid-color: rgb(239 239 239);
   --color-border-soft: rgb(var(--color-gray-900-rgb) / 0.1);
   --color-border-medium: rgb(var(--color-gray-900-rgb) / 0.2);
   --color-border-strong: rgb(var(--color-gray-900-rgb) / 0.3);

@@ -5,9 +5,11 @@ import Container from "../ui/Container.astro";
 
 <section id="hero" class="flex min-h-screen items-center px-4 py-20 md:px-8">
   <Container>
-    <div class="hero-layout">
-      <div class="hero-copy">
-        <p class="mono text-secondary mb-4 text-sm">Hi! My name is</p>
+    <div
+      class="grid items-center md:grid-cols-[minmax(0,1.35fr)_minmax(14rem,0.65fr)] md:gap-16"
+    >
+      <div class="min-w-0">
+        <p class="text-secondary mb-4 font-mono text-sm">Hi! My name is</p>
         <h1 class="gradient-text mb-6 text-5xl font-bold md:text-7xl">
           Sam Riddle
         </h1>
@@ -29,3 +31,61 @@ import Container from "../ui/Container.astro";
     </div>
   </Container>
 </section>
+
+<style>
+  .gradient-text {
+    background: linear-gradient(
+      135deg,
+      var(--color-accent-light),
+      var(--color-accent),
+      var(--color-accent-dark)
+    );
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift var(--duration-gradient) var(--ease-standard)
+      infinite;
+  }
+
+  .hero-mark {
+    display: none;
+    width: min(34vw, 24rem);
+    aspect-ratio: 1;
+    justify-self: end;
+    background:
+      radial-gradient(
+        circle,
+        rgb(var(--color-accent-rgb) / 0.18),
+        transparent 68%
+      ),
+      var(--color-accent);
+    -webkit-mask: url("/favicon-red.svg") center / contain no-repeat;
+    mask: url("/favicon-red.svg") center / contain no-repeat;
+    opacity: 0.9;
+    filter: drop-shadow(0 2rem 4rem rgb(var(--color-accent-rgb) / 0.18));
+  }
+
+  @media (min-width: 768px) {
+    .hero-mark {
+      display: block;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gradient-text {
+      animation: none;
+    }
+  }
+
+  @keyframes gradientShift {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+</style>

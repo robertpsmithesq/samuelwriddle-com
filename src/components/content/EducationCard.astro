@@ -12,17 +12,18 @@ interface Props {
 
 const { degree, dateLabel, institution, location, details, highlights } =
   Astro.props;
+
+const dotClasses =
+  "absolute top-8 left-1 grid h-4 w-4 place-items-center rounded-full border border-brand-strong bg-canvas shadow-timeline-dot md:left-6";
 ---
 
 <article class="timeline-item relative pl-10 md:pl-20">
-  <div
-    class="timeline-dot absolute top-8 left-1 h-4 w-4 rounded-full md:left-6"
-    aria-hidden="true"
-  >
-    <span></span>
+  <div class={dotClasses} aria-hidden="true">
+    <span class="bg-brand shadow-timeline-dot-inner h-1.5 w-1.5 rounded-full"
+    ></span>
   </div>
 
-  <Card class="timeline-card">
+  <Card class="relative">
     <header
       class="mb-2 flex flex-col gap-2 md:flex-row md:items-start md:justify-between"
     >
@@ -39,3 +40,21 @@ const { degree, dateLabel, institution, location, details, highlights } =
     </ul>
   </Card>
 </article>
+
+<style>
+  .impact-list li {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .impact-list li::before {
+    position: absolute;
+    top: 0.7em;
+    left: 0;
+    width: 0.5rem;
+    height: 1px;
+    content: "";
+    background: var(--color-text-primary);
+    box-shadow: 0 0 10px rgb(239 68 68 / 45%);
+  }
+</style>

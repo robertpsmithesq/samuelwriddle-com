@@ -37,12 +37,15 @@ const toDateLabel = (startDate: Date, endDate: Date | "Present") => {
 
 const visibleExperiences = sortedExperiences.slice(0, 2);
 const expandableExperiences = sortedExperiences.slice(2);
+
+const revealButtonClasses =
+  "timeline-reveal-pill inline-flex min-h-10 items-center justify-center gap-3 rounded-full border border-line-medium bg-canvas-overlay px-4 py-2.5 text-sm text-primary backdrop-blur-panel transition-[color,border-color,transform] [font:inherit] hover:-translate-y-px hover:border-primary hover:bg-surface hover:text-primary";
 ---
 
 <section id="experience" class="px-4 py-20 md:px-8">
   <Container class="max-w-6xl">
     <h2 class="mb-12 text-3xl font-bold">
-      My <span class="accent-red">Experience</span>
+      My <span class="text-brand">Experience</span>
     </h2>
 
     <div class="mx-auto w-full md:w-[60vw] md:max-w-full">
@@ -66,9 +69,9 @@ const expandableExperiences = sortedExperiences.slice(2);
 
         {
           expandableExperiences.length > 0 && (
-            <div class="timeline-reveal" data-timeline-reveal>
+            <div class="timeline-reveal relative pt-2" data-timeline-reveal>
               <button
-                class="timeline-reveal-pill timeline-reveal-pill--top"
+                class={`${revealButtonClasses} timeline-reveal-pill--top absolute top-7 left-1/2 z-[2] -translate-x-1/2 hover:-translate-x-1/2`}
                 type="button"
                 aria-expanded="false"
                 data-timeline-expand
@@ -76,7 +79,10 @@ const expandableExperiences = sortedExperiences.slice(2);
                 Show earlier experience
               </button>
 
-              <div class="timeline-reveal-items" data-timeline-reveal-items>
+              <div
+                class="timeline-reveal-items overflow-hidden opacity-100"
+                data-timeline-reveal-items
+              >
                 <div class="space-y-12">
                   {expandableExperiences.map((experience) => (
                     <TimelineItem
@@ -96,7 +102,7 @@ const expandableExperiences = sortedExperiences.slice(2);
               </div>
 
               <button
-                class="timeline-reveal-pill timeline-reveal-pill--bottom"
+                class={`${revealButtonClasses} timeline-reveal-pill--bottom mx-auto mt-8`}
                 type="button"
                 aria-expanded="true"
                 data-timeline-collapse
@@ -151,3 +157,36 @@ const expandableExperiences = sortedExperiences.slice(2);
     });
   }
 </script>
+
+<style>
+  .timeline-reveal--ready .timeline-reveal-items {
+    max-height: 6rem;
+    opacity: 0.5;
+    transition:
+      max-height 680ms var(--ease-in-out),
+      opacity var(--duration-base) var(--ease-standard);
+    mask-image: linear-gradient(180deg, black 0%, transparent 92%);
+  }
+
+  .timeline-reveal--open .timeline-reveal-items {
+    opacity: 1;
+    mask-image: none;
+  }
+
+  .timeline-reveal-pill--top {
+    display: none;
+  }
+
+  .timeline-reveal-pill--bottom {
+    display: none;
+  }
+
+  .timeline-reveal--ready:not(.timeline-reveal--open)
+    .timeline-reveal-pill--top {
+    display: inline-flex;
+  }
+
+  .timeline-reveal--open .timeline-reveal-pill--bottom {
+    display: flex;
+  }
+</style>

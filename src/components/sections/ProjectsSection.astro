@@ -26,11 +26,11 @@ const sortedProjects = projects.sort((a, b) => {
   <Container>
     <div class="mb-12 max-w-2xl">
       <h2 class="text-3xl font-bold">
-        My <span class="accent-red">Projects</span>
+        My <span class="text-brand">Projects</span>
       </h2>
     </div>
 
-    <div class="project-features" aria-label="Featured projects">
+    <div class="grid gap-24" aria-label="Featured projects">
       {
         sortedProjects.map((project) => (
           <Project

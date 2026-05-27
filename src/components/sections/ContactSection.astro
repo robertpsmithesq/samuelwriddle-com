@@ -13,17 +13,23 @@ const links = [
     href: "https://github.com/riddlemeS4m",
   },
 ];
+
+const linkClasses =
+  "online-link group relative grid min-h-28 grid-cols-[1fr_auto] items-center gap-4 overflow-hidden rounded-xl border border-line-soft p-4 px-[1.125rem] text-inherit no-underline transition hover:-translate-y-0.75 hover:border-brand-strong hover:shadow-[0_18px_48px_rgb(0_0_0_/_0.18)] focus-visible:-translate-y-0.75 focus-visible:border-brand-strong focus-visible:outline-none focus-visible:shadow-[var(--focus-ring-accent),0_18px_48px_rgb(0_0_0_/_0.18)] sm:min-h-[7.75rem]";
+const linkCopyClasses = "grid min-w-0 gap-2 pr-3 pb-3.5";
+const arrowClasses =
+  "grid h-9 w-9 translate-x-[-0.375rem] place-items-center self-center justify-self-end rounded-full border border-brand-medium bg-brand-soft text-primary opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100";
 ---
 
 <section id="contact" class="px-4 py-20 md:px-8">
   <Container class="max-w-6xl">
     <div class="mx-auto w-full md:w-[60vw] md:max-w-full">
       <div class="mx-auto mb-8 max-w-2xl text-center">
-        <p class="online-section-cta">
+        <p class="text-secondary mb-6 text-lg leading-[1.7] italic sm:mb-8">
           Want to see what I'm building or get in touch?
         </p>
         <h2 class="text-3xl font-bold">
-          Find Me <span class="accent-red">Online</span>
+          Find Me <span class="text-brand">Online</span>
         </h2>
       </div>
 
@@ -34,16 +40,21 @@ const links = [
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              class="online-link group"
+              class={linkClasses}
               aria-label={`${link.label}: ${link.description} Opens in a new tab.`}
             >
-              <span class="online-link-copy">
-                <span class="online-link-label">{link.label}</span>
-                <span class="online-link-description">{link.description}</span>
+              <span class={linkCopyClasses}>
+                <span class="text-primary text-lg leading-tight font-bold">
+                  {link.label}
+                </span>
+                <span class="text-secondary leading-[1.55]">
+                  {link.description}
+                </span>
               </span>
 
-              <span class="online-link-arrow" aria-hidden="true">
+              <span class={arrowClasses} aria-hidden="true">
                 <svg
+                  class="h-4 w-4"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -62,3 +73,36 @@ const links = [
     </div>
   </Container>
 </section>
+
+<style>
+  .online-link {
+    background:
+      linear-gradient(
+        135deg,
+        rgb(var(--color-accent-rgb) / 0.12),
+        transparent 34%
+      ),
+      linear-gradient(180deg, var(--color-surface-soft), transparent),
+      var(--color-background);
+  }
+
+  .online-link::after {
+    position: absolute;
+    right: 1.125rem;
+    bottom: 1rem;
+    left: 1.125rem;
+    height: 1px;
+    content: "";
+    background: linear-gradient(90deg, var(--color-accent), transparent 72%);
+    opacity: 0.45;
+    transform: scaleX(0.42);
+    transform-origin: left;
+    transition: var(--transition-base);
+  }
+
+  .online-link:hover::after,
+  .online-link:focus-visible::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+</style>

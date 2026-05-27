@@ -3,3 +3,148 @@
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
+
+<style>
+  .gradient-mesh {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(
+        circle at 20% 30%,
+        var(--effect-mesh-red-soft),
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 70%,
+        var(--effect-mesh-gray-soft),
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 40% 80%,
+        var(--effect-mesh-red-soft),
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 60% 20%,
+        var(--effect-mesh-gray-soft),
+        transparent 40%
+      );
+    opacity: 0.15;
+    animation: meshFloat var(--duration-mesh) var(--ease-in-out) infinite;
+  }
+
+  :global(.light-mode) .gradient-mesh {
+    opacity: 0.08;
+  }
+
+  .grid-pattern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--effect-grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--effect-grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .orb {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    opacity: 0.1;
+    filter: blur(var(--blur-orb));
+    animation: floatOrb var(--duration-particle) var(--ease-in-out) infinite;
+  }
+
+  :global(.light-mode) .orb {
+    opacity: 0.05;
+  }
+
+  .orb1 {
+    top: 10%;
+    left: 70%;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(
+      135deg,
+      var(--effect-orb-red-start),
+      var(--effect-orb-red-end)
+    );
+    animation-delay: 0s;
+  }
+
+  .orb2 {
+    top: 60%;
+    left: 10%;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(
+      135deg,
+      var(--effect-orb-mixed-start),
+      var(--effect-orb-mixed-end)
+    );
+    animation-delay: 7s;
+  }
+
+  .orb3 {
+    top: 80%;
+    left: 80%;
+    width: 250px;
+    height: 250px;
+    background: linear-gradient(
+      135deg,
+      var(--effect-orb-neutral-start),
+      var(--effect-orb-neutral-end)
+    );
+    animation-delay: 14s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gradient-mesh,
+    .orb {
+      animation: none;
+    }
+  }
+
+  @keyframes meshFloat {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    25% {
+      transform: translate(-30px, -40px) scale(1.1) rotate(1deg);
+    }
+
+    50% {
+      transform: translate(30px, -20px) scale(0.95) rotate(-1deg);
+    }
+
+    75% {
+      transform: translate(-20px, 30px) scale(1.05) rotate(0.5deg);
+    }
+  }
+
+  @keyframes floatOrb {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+      transform: translate(40px, -60px) scale(1.1);
+    }
+
+    66% {
+      transform: translate(-30px, 40px) scale(0.9);
+    }
+  }
+</style>

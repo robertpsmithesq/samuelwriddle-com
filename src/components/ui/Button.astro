@@ -15,10 +15,15 @@ const {
   ...attrs
 } = Astro.props;
 
-const variantClass = variant === "secondary" ? "btn-secondary" : "btn-primary";
+const variantClasses = {
+  primary: "bg-brand text-white transition hover:bg-brand-dark",
+  secondary:
+    "border border-line-strong bg-transparent text-primary transition hover:border-primary hover:bg-surface hover:text-primary",
+};
+
 const classes = [
   "inline-flex items-center justify-center rounded-lg px-6 py-3 font-medium",
-  variantClass,
+  variantClasses[variant],
   className,
 ];
 ---

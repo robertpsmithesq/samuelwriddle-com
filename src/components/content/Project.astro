@@ -21,18 +21,37 @@ const {
   image,
   reverse = false,
 } = Astro.props;
+
+const articleClasses = [
+  "grid items-center gap-8 md:gap-16",
+  reverse
+    ? "md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
+    : "md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]",
+];
+
+const copyClasses = ["min-w-0", reverse && "md:order-2"];
+const cardClasses = ["min-w-0", reverse && "md:order-1"];
 ---
 
-<article
-  class:list={["project-feature", reverse && "project-feature--reversed"]}
->
-  <div class="project-feature-copy">
-    <h3>{name}</h3>
-    <p>{description}</p>
-    <div class="project-feature-tags" aria-label={`${name} technologies`}>
+<article class:list={articleClasses}>
+  <div class:list={copyClasses}>
+    <h3
+      class="text-primary mb-4 text-[clamp(2rem,4vw,3.5rem)] leading-none font-extrabold"
+    >
+      {name}
+    </h3>
+    <p class="text-primary max-w-[38rem] text-lg leading-[1.7]">
+      {description}
+    </p>
+    <div
+      class="mt-6 flex flex-wrap gap-2.5"
+      aria-label={`${name} technologies`}
+    >
       {tags.map((technology) => <Badge solid>{technology}</Badge>)}
     </div>
   </div>
 
-  <ProjectCard name={name} tag={tag} href={href} image={image} />
+  <div class:list={cardClasses}>
+    <ProjectCard name={name} tag={tag} href={href} image={image} />
+  </div>
 </article>

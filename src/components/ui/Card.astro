@@ -2,15 +2,24 @@
 interface Props {
   class?: string;
   interactive?: boolean;
+  highlighted?: boolean;
 }
 
-const { class: className, interactive = false } = Astro.props;
+const {
+  class: className,
+  highlighted = false,
+  interactive = false,
+} = Astro.props;
 ---
 
 <div
   class:list={[
-    "card rounded-xl p-6",
-    { "card--interactive": interactive },
+    "border-line-soft bg-surface backdrop-blur-panel rounded-xl border p-6 transition",
+    {
+      "border-brand-strong shadow-card-highlight": highlighted,
+      "hover:border-brand-strong hover:shadow-card-hover hover:-translate-y-0.5":
+        interactive,
+    },
     className,
   ]}
 >
