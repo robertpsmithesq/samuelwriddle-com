@@ -24,6 +24,7 @@ When unsure, start with planning before editing code.
 - Report changed files and verification steps after implementation.
 
 ## Environment hiccups
+
 - Run `nvm use` before running any commands in a session, to make sure the proper version of node is being used
 - This project favors pnpm over npm
 
