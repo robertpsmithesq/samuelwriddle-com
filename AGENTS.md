@@ -23,6 +23,10 @@ When unsure, start with planning before editing code.
 - Favor readable code over clever code.
 - Report changed files and verification steps after implementation.
 
+## Environment hiccups
+- Run `nvm use` before running any commands in a session, to make sure the proper version of node is being used
+- This project favors pnpm over npm
+
 ## Done means
 
 A task is not complete until the agent has:
