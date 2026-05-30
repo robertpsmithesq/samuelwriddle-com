@@ -9,7 +9,7 @@ const skillMappings = [
     prompt: "Ask me about my hackathon win.",
   },
   {
-    skill: "Process Design",
+    skill: "Process Development",
     output:
       "I separate vague workflows into clear stages, and I'm aware of bottlenecks.",
     prompt: "Ask me about my budgeting app.",
@@ -34,14 +34,15 @@ const skillMappings = [
   },
 ];
 
-const mapClasses =
-  "mx-auto grid w-full gap-7 md:w-[60vw] md:max-w-full md:gap-5";
+const mapClasses = "skills-map-grid mx-auto grid w-full gap-5 sm:grid-cols-2";
 const rowClasses =
-  "skills-map-row relative grid items-center gap-3.5 rounded-2xl border border-line-soft p-6 text-center md:grid-cols-2 md:gap-8 md:p-8 md:text-left";
+  "skills-map-row relative grid items-start gap-5 rounded-2xl border border-line-soft px-6 py-10 text-center sm:min-h-full sm:px-7 sm:py-12 min-[1000px]:grid-rows-[4.25rem_1fr] min-[1000px]:px-5 min-[1000px]:py-12";
+const headingWrapClasses =
+  "flex min-h-[4.25rem] items-end justify-center text-center min-[1000px]:min-h-0";
 const headingClasses =
   "relative m-0 inline-block pb-[0.55rem] text-xl leading-[1.15] font-bold text-primary [text-wrap:balance]";
 const outputTextClasses =
-  "mx-auto max-w-[34rem] text-center text-lg leading-[1.625] [text-wrap:balance]";
+  "mx-auto max-w-[34rem] text-center text-base leading-[1.6] [text-wrap:balance]";
 const outputPromptClasses =
   "mx-auto mt-[0.35rem] max-w-[34rem] text-center text-[0.95rem] leading-[1.45] text-secondary italic [text-wrap:balance]";
 ---
@@ -58,7 +59,7 @@ const outputPromptClasses =
       {
         skillMappings.map((skill) => (
           <article class={rowClasses}>
-            <div class="text-center">
+            <div class={headingWrapClasses}>
               <h3 class={headingClasses}>{skill.skill}</h3>
             </div>
 
@@ -74,6 +75,12 @@ const outputPromptClasses =
 </section>
 
 <style>
+  @media (min-width: 1000px) {
+    .skills-map-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
   .skills-map-row {
     background:
       linear-gradient(
