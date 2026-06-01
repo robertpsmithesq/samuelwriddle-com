@@ -1,0 +1,149 @@
+---
+import { getCollection } from "astro:content";
+import DetailedProjectCard from "../components/content/DetailedProjectCard.astro";
+import Container from "../components/ui/Container.astro";
+import PageHero from "../components/ui/PageHero.astro";
+import PageLayout from "../layouts/PageLayout.astro";
+
+const projects = await getCollection("projects");
+
+const sortedProjects = projects.sort((a, b) => {
+  if (a.data.order != null && b.data.order != null) {
+    return a.data.order - b.data.order;
+  }
+
+  if (a.data.order != null) {
+    return -1;
+  }
+
+  if (b.data.order != null) {
+    return 1;
+  }
+
+  return a.data.name.localeCompare(b.data.name);
+});
+
+const cardLayouts = [
+  "wide",
+  "narrow",
+  "half",
+  "half",
+  "narrow",
+  "wide",
+  "third",
+] as const;
+
+const [pinnedProject, ...tiledProjects] = sortedProjects;
+---
+
+<PageLayout
+  title="Projects | Sam Riddle"
+  description="A collection of software projects by Sam Riddle."
+  canonicalUrl="https://samuelwriddle.com/projects"
+>
+  <PageHero
+    caption="Hey! Here are some of"
+    title="My Projects"
+    description="I'm a builder at heart, and I'm often writing code during my free time. My focus is on building web applications that complement complex processes I've become familiar with through work or school."
+  />
+
+  <section class="px-4 pb-16 md:px-8 md:pb-24" aria-labelledby="projects-grid">
+    <Container>
+      <div class="mosaic grid grid-cols-1 gap-5 sm:grid-cols-2" role="list">
+        {
+          pinnedProject && (
+            <DetailedProjectCard
+              featured
+              name={pinnedProject.data.name}
+              tag={pinnedProject.data.tag}
+              href={pinnedProject.data.href}
+              description={pinnedProject.data.description}
+              tags={pinnedProject.data.tags}
+              image={pinnedProject.data.image}
+            />
+          )
+        }
+
+        {
+          tiledProjects.map((project, index) => (
+            <DetailedProjectCard
+              name={project.data.name}
+              tag={project.data.tag}
+              href={project.data.href}
+              description={project.data.description}
+              tags={project.data.tags}
+              image={project.data.image}
+              variant={cardLayouts[index % cardLayouts.length]}
+            />
+          ))
+        }
+      </div>
+    </Container>
+  </section>
+</PageLayout>
+
+<script>
+  const syncProjectImagePanels = () => {
+    document.querySelectorAll<HTMLElement>(".mosaic").forEach((grid) => {
+      const favoriteImage = grid.querySelector<HTMLElement>(
+        ".project-detail-card-hero .project-detail-image",
+      );
+
+      if (!favoriteImage) {
+        return;
+      }
+
+      const favoriteImageStyles = window.getComputedStyle(favoriteImage);
+      const verticalInsets =
+        parseFloat(favoriteImageStyles.paddingTop) +
+        parseFloat(favoriteImageStyles.paddingBottom) +
+        parseFloat(favoriteImageStyles.borderTopWidth) +
+        parseFloat(favoriteImageStyles.borderBottomWidth);
+      const imageHeight = Math.ceil(
+        favoriteImage.getBoundingClientRect().height - verticalInsets,
+      );
+
+      if (imageHeight <= 0) {
+        return;
+      }
+
+      const nextValue = `${imageHeight}px`;
+
+      if (
+        grid.style.getPropertyValue("--project-detail-image-height") !==
+        nextValue
+      ) {
+        grid.style.setProperty("--project-detail-image-height", nextValue);
+      }
+    });
+  };
+
+  requestAnimationFrame(syncProjectImagePanels);
+  window.addEventListener("load", syncProjectImagePanels);
+  window.addEventListener("resize", syncProjectImagePanels);
+
+  if ("ResizeObserver" in window) {
+    const observer = new ResizeObserver(syncProjectImagePanels);
+
+    document
+      .querySelectorAll(
+        ".project-detail-card-hero, .project-detail-card-hero img",
+      )
+      .forEach((element) => observer.observe(element));
+  }
+</script>
+
+<style>
+  .grid-rule::after {
+    flex: 1;
+    height: 1px;
+    content: "";
+    background: var(--color-border-soft);
+  }
+
+  @media (min-width: 900px) {
+    .mosaic {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+</style>

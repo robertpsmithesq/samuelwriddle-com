@@ -1,0 +1,173 @@
+---
+interface Props {
+  name: string;
+  tag: string;
+  href: string;
+  description: string;
+  tags: string[];
+  image?: string;
+  featured?: boolean;
+  variant?: "wide" | "narrow" | "half" | "third";
+}
+
+const {
+  name,
+  tag,
+  href,
+  description,
+  tags,
+  image,
+  featured = false,
+  variant = "half",
+} = Astro.props;
+
+const articleClasses = [
+  "project-detail-card group relative flex cursor-pointer flex-col overflow-hidden rounded-[0.875rem] border border-line-soft bg-surface backdrop-blur-panel transition hover:-translate-y-[3px] hover:border-brand-medium hover:shadow-card-hover",
+  "before:pointer-events-none before:absolute before:inset-0 before:bg-[linear-gradient(135deg,rgb(var(--color-accent-rgb)/0.07)_0%,transparent_40%)] before:opacity-0 before:transition group-hover:before:opacity-100",
+  featured
+    ? "project-detail-card-hero min-[900px]:col-span-12"
+    : `project-detail-card-${variant}`,
+  {
+    "min-[900px]:col-span-7": !featured && variant === "wide",
+    "min-[900px]:col-span-5": !featured && variant === "narrow",
+    "min-[900px]:col-span-6": !featured && variant === "half",
+    "min-[900px]:col-span-4": !featured && variant === "third",
+  },
+];
+
+const linkClasses = [
+  "relative flex min-w-0 flex-1 flex-col text-inherit no-underline",
+  featured &&
+    "min-[900px]:grid min-[900px]:grid-cols-[minmax(0,0.45fr)_minmax(0,0.55fr)]",
+];
+
+const imageClasses = [
+  "project-detail-image relative flex min-h-[var(--project-detail-image-height,auto)] shrink-0 items-center justify-center overflow-hidden border-b border-line-soft p-8",
+  featured && "min-[900px]:min-h-0 min-[900px]:border-r min-[900px]:border-b-0",
+];
+
+const bodyClasses = [
+  "flex flex-1 flex-col px-6 pt-[1.375rem] pb-6",
+  featured &&
+    "px-8 py-8 min-[900px]:justify-center min-[900px]:px-9 min-[900px]:py-9",
+];
+
+const titleClasses = [
+  "font-bold leading-tight",
+  featured
+    ? "text-[clamp(1.375rem,2.5vw,2rem)] font-extrabold leading-[1.15]"
+    : variant === "half" || variant === "third"
+      ? "text-base"
+      : "text-lg",
+];
+---
+
+<article
+  class:list={articleClasses}
+  data-project-detail-card
+  data-featured={featured ? "true" : undefined}
+  role="listitem"
+>
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    class:list={linkClasses}
+    aria-label={`Open ${name}`}
+  >
+    <div class:list={imageClasses} aria-hidden="true">
+      {
+        image ? (
+          <img class="block object-contain" src={image} alt="" loading="lazy" />
+        ) : (
+          <span class="project-detail-image-mark" />
+        )
+      }
+    </div>
+
+    <div class:list={bodyClasses}>
+      <div class="mb-[0.35rem] flex flex-wrap items-center gap-3">
+        {
+          featured ? (
+            <h2 class:list={titleClasses}>{name}</h2>
+          ) : (
+            <h3 class:list={titleClasses}>{name}</h3>
+          )
+        }
+        {
+          featured && (
+            <p class="border-brand-medium bg-brand-soft text-brand before:bg-brand flex w-fit shrink-0 items-center gap-[0.35rem] rounded-full border px-[0.65rem] py-[0.2rem] font-mono text-[0.68rem] before:block before:h-[0.4rem] before:w-[0.4rem] before:rounded-full before:content-['']">
+              My favorite
+            </p>
+          )
+        }
+      </div>
+
+      <p
+        class="text-tertiary mb-[0.875rem] font-mono text-[0.76rem] leading-[1.45]"
+      >
+        {tag}
+      </p>
+
+      <p class="text-secondary mb-4 text-[0.9rem] leading-[1.65]">
+        {description}
+      </p>
+
+      <div
+        class="mt-auto flex items-center justify-between gap-4 pt-[0.875rem]"
+      >
+        <div
+          class="flex flex-wrap gap-[0.35rem]"
+          aria-label={`${name} technologies`}
+        >
+          {
+            tags.map((technology) => (
+              <span class="text-tertiary border-line-medium bg-badge-solid inline-flex rounded-[0.3rem] border px-[0.55rem] py-[0.15rem] font-mono text-[0.68rem] transition">
+                {technology}
+              </span>
+            ))
+          }
+        </div>
+        <span
+          class="text-tertiary border-line-medium group-hover:text-brand group-hover:border-brand-medium inline-flex h-[1.625rem] w-[1.625rem] shrink-0 items-center justify-center rounded-full border transition group-hover:translate-x-0.5"
+          aria-hidden="true"
+        >
+          <svg
+            class="h-3 w-3"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14"></path>
+            <path d="m13 6 6 6-6 6"></path>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </a>
+</article>
+
+<style>
+  .project-detail-image {
+    background:
+      linear-gradient(
+        135deg,
+        rgb(var(--color-accent-rgb) / 0.18),
+        transparent 55%
+      ),
+      rgb(var(--color-background-rgb) / 0.04);
+  }
+
+  .project-detail-image-mark {
+    display: block;
+    width: 4rem;
+    aspect-ratio: 1;
+    background: var(--color-accent);
+    opacity: 0.22;
+    -webkit-mask: url("/favicon-red.svg") center / contain no-repeat;
+    mask: url("/favicon-red.svg") center / contain no-repeat;
+  }
+</style>
