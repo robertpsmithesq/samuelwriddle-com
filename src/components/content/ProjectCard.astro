@@ -4,9 +4,10 @@ interface Props {
   tag: string;
   href: string;
   image?: string;
+  external?: boolean;
 }
 
-const { name, tag, href, image } = Astro.props;
+const { name, tag, href, image, external = true } = Astro.props;
 
 const cardClasses =
   "block w-full min-w-0 overflow-hidden rounded-2xl border border-line-soft bg-surface text-inherit no-underline backdrop-blur-panel transition hover:-translate-y-0.5 hover:border-brand-strong hover:shadow-card-hover";
@@ -20,10 +21,10 @@ const captionClasses =
 
 <a
   href={href}
-  target="_blank"
-  rel="noopener noreferrer"
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
   class={cardClasses}
-  aria-label={`Open ${name}`}
+  aria-label={external ? `Open ${name}` : `View ${name} project details`}
 >
   <div class={previewClasses} aria-hidden="true">
     {

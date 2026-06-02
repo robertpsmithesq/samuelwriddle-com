@@ -36,11 +36,16 @@ const sortedProjects = projects.sort((a, b) => {
           <Project
             name={project.data.name}
             tag={project.data.tag}
-            href={project.data.href}
+            href={
+              project.data.unpublished
+                ? project.data.href
+                : `/projects/${project.id}`
+            }
             description={project.data.description}
             tags={project.data.tags}
             image={project.data.image}
             reverse={project.data.reverse}
+            external={project.data.unpublished === true}
           />
         ))
       }
