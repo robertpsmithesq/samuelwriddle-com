@@ -8,6 +8,7 @@ interface Props {
   image?: string;
   featured?: boolean;
   variant?: "wide" | "narrow" | "half" | "third";
+  external?: boolean;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   image,
   featured = false,
   variant = "half",
+  external = true,
 } = Astro.props;
 
 const articleClasses = [
@@ -70,10 +72,10 @@ const titleClasses = [
 >
   <a
     href={href}
-    target="_blank"
-    rel="noopener noreferrer"
+    target={external ? "_blank" : undefined}
+    rel={external ? "noopener noreferrer" : undefined}
     class:list={linkClasses}
-    aria-label={`Open ${name}`}
+    aria-label={external ? `Open ${name}` : `View ${name} project details`}
   >
     <div class:list={imageClasses} aria-hidden="true">
       {

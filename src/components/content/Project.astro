@@ -10,6 +10,7 @@ interface Props {
   tags: string[];
   image?: string;
   reverse?: boolean;
+  external?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   tags,
   image,
   reverse = false,
+  external = true,
 } = Astro.props;
 
 const articleClasses = [
@@ -52,6 +54,12 @@ const cardClasses = ["min-w-0", reverse && "md:order-1"];
   </div>
 
   <div class:list={cardClasses}>
-    <ProjectCard name={name} tag={tag} href={href} image={image} />
+    <ProjectCard
+      name={name}
+      tag={tag}
+      href={href}
+      image={image}
+      external={external}
+    />
   </div>
 </article>
