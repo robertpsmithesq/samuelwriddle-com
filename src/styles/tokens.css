@@ -49,6 +49,7 @@
   --color-text-tertiary: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.52);
 
   --color-surface-soft: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.05);
+  --color-solid-surface: var(--color-gray-800);
   --badge-solid-color: rgb(43 43 45);
   --color-border-soft: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.1);
   --color-border-medium: rgb(var(--color-gray-25-rgb, 255 255 255) / 0.2);
@@ -107,6 +108,7 @@
   --color-accent-dark: var(--color-red-900);
 
   --color-surface-soft: rgb(var(--color-gray-900-rgb) / 0.03);
+  --color-solid-surface: var(--color-gray-50);
   --badge-solid-color: rgb(239 239 239);
   --color-border-soft: rgb(var(--color-gray-900-rgb) / 0.1);
   --color-border-medium: rgb(var(--color-gray-900-rgb) / 0.2);
