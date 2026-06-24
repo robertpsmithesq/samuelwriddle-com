@@ -24,7 +24,7 @@ const {
 } = Astro.props;
 
 const articleClasses = [
-  "project-detail-card group relative flex cursor-pointer flex-col overflow-hidden rounded-[0.875rem] border border-line-soft bg-surface backdrop-blur-panel transition hover:-translate-y-[3px] hover:border-brand-medium hover:shadow-card-hover",
+  "project-detail-card group relative flex cursor-pointer flex-col overflow-hidden rounded-[0.875rem] border border-line-soft bg-surface backdrop-blur-panel transition [background-clip:padding-box] hover:-translate-y-[3px] hover:border-brand-medium hover:shadow-card-hover",
   "before:pointer-events-none before:absolute before:inset-0 before:bg-[linear-gradient(135deg,rgb(var(--color-accent-rgb)/0.07)_0%,transparent_40%)] before:opacity-0 before:transition group-hover:before:opacity-100",
   featured
     ? "project-detail-card-hero min-[900px]:col-span-12"
@@ -154,6 +154,11 @@ const titleClasses = [
 
 <style>
   .project-detail-image {
+    border-color: color-mix(
+      in srgb,
+      var(--color-text-primary) 10%,
+      var(--color-background)
+    );
     background:
       linear-gradient(
         135deg,
@@ -161,6 +166,7 @@ const titleClasses = [
         transparent 55%
       ),
       rgb(var(--color-background-rgb) / 0.04);
+    background-clip: padding-box;
   }
 
   .project-detail-image-mark {
