@@ -20,6 +20,12 @@ const sortedProjects = projects.sort((a, b) => {
 
   return a.data.name.localeCompare(b.data.name);
 });
+
+const visibleProjects = sortedProjects.slice(0, 1);
+const expandableProjects = sortedProjects.slice(1);
+
+const revealButtonClasses =
+  "projects-reveal-pill inline-flex min-h-10 items-center justify-center gap-3 rounded-full border border-line-medium bg-canvas-overlay px-4 py-2.5 text-sm text-primary backdrop-blur-panel transition-[color,border-color,transform] [font:inherit] hover:-translate-y-px hover:border-primary hover:bg-surface hover:text-primary";
 ---
 
 <section id="projects" class="px-4 py-20 md:px-8">
@@ -32,7 +38,7 @@ const sortedProjects = projects.sort((a, b) => {
 
     <div class="grid gap-24" aria-label="Featured projects">
       {
-        sortedProjects.map((project) => (
+        visibleProjects.map((project) => (
           <Project
             name={project.data.name}
             tag={project.data.tag}
@@ -49,6 +55,126 @@ const sortedProjects = projects.sort((a, b) => {
           />
         ))
       }
+
+      {
+        expandableProjects.length > 0 && (
+          <div class="projects-reveal relative" data-projects-reveal>
+            <button
+              class={`${revealButtonClasses} projects-reveal-pill--top absolute top-24 left-1/2 z-[2] -translate-x-1/2 hover:-translate-x-1/2`}
+              type="button"
+              aria-expanded="false"
+              data-projects-expand
+            >
+              See more projects
+            </button>
+
+            <div
+              class="projects-reveal-items overflow-hidden opacity-100"
+              data-projects-reveal-items
+            >
+              <div class="grid gap-24">
+                {expandableProjects.map((project) => (
+                  <Project
+                    name={project.data.name}
+                    tag={project.data.tag}
+                    href={
+                      project.data.unpublished
+                        ? project.data.href
+                        : `/projects/${project.id}`
+                    }
+                    description={project.data.description}
+                    tags={project.data.tags}
+                    image={project.data.image}
+                    reverse={project.data.reverse}
+                    external={project.data.unpublished === true}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <button
+              class={`${revealButtonClasses} projects-reveal-pill--bottom mx-auto mt-12`}
+              type="button"
+              aria-expanded="true"
+              data-projects-collapse
+            >
+              Show fewer projects
+            </button>
+          </div>
+        )
+      }
     </div>
   </Container>
 </section>
+
+<script>
+  const reveal = document.querySelector("[data-projects-reveal]");
+
+  if (reveal) {
+    const expandButton = reveal.querySelector("[data-projects-expand]");
+    const collapseButton = reveal.querySelector("[data-projects-collapse]");
+    const revealItems = reveal.querySelector("[data-projects-reveal-items]");
+
+    const setExpanded = (expanded: boolean) => {
+      if (revealItems instanceof HTMLElement) {
+        revealItems.style.maxHeight = expanded
+          ? `${revealItems.scrollHeight}px`
+          : "";
+        revealItems.inert = !expanded;
+      }
+
+      reveal.classList.toggle("projects-reveal--open", expanded);
+      expandButton?.setAttribute("aria-expanded", String(expanded));
+      collapseButton?.setAttribute("aria-expanded", String(expanded));
+      revealItems?.setAttribute("aria-hidden", String(!expanded));
+    };
+
+    expandButton?.addEventListener("click", () => setExpanded(true));
+    collapseButton?.addEventListener("click", () => {
+      setExpanded(false);
+      expandButton?.scrollIntoView({ block: "center", behavior: "smooth" });
+    });
+
+    reveal.classList.add("projects-reveal--ready");
+    setExpanded(false);
+
+    window.addEventListener("resize", () => {
+      if (
+        reveal.classList.contains("projects-reveal--open") &&
+        revealItems instanceof HTMLElement
+      ) {
+        revealItems.style.maxHeight = `${revealItems.scrollHeight}px`;
+      }
+    });
+  }
+</script>
+
+<style>
+  .projects-reveal--ready .projects-reveal-items {
+    max-height: 12.625rem;
+    opacity: 0.35;
+    transition:
+      max-height 680ms var(--ease-in-out),
+      opacity var(--duration-base) var(--ease-standard);
+    mask-image: linear-gradient(180deg, black 0%, transparent 92%);
+  }
+
+  .projects-reveal--open .projects-reveal-items {
+    opacity: 1;
+    mask-image: none;
+  }
+
+  .projects-reveal-pill--top,
+  .projects-reveal-pill--bottom {
+    display: none;
+  }
+
+  .projects-reveal--ready:not(.projects-reveal--open)
+    .projects-reveal-pill--top {
+    display: inline-flex;
+  }
+
+  .projects-reveal--open .projects-reveal-pill--bottom {
+    display: flex;
+  }
+</style>
