@@ -1,0 +1,242 @@
+---
+import { getCollection, render } from "astro:content";
+import ProjectStatusCard from "../../components/content/ProjectStatusCard.astro";
+import StickySectionNav from "../../components/content/StickySectionNav.astro";
+import ContactSection from "../../components/sections/ContactSection.astro";
+import Container from "../../components/ui/Container.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
+
+const projects = await getCollection("projects");
+
+export async function getStaticPaths() {
+  const publishedProjects = (await getCollection("projects")).filter(
+    (project) => !project.data.unpublished,
+  );
+
+  return publishedProjects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content, headings } = await render(project);
+
+const relatedProjects = projects
+  .filter((candidate) => candidate.id !== project.id)
+  .sort((a, b) => {
+    if (a.data.order != null && b.data.order != null) {
+      return a.data.order - b.data.order;
+    }
+
+    if (a.data.order != null) {
+      return -1;
+    }
+
+    if (b.data.order != null) {
+      return 1;
+    }
+
+    return a.data.name.localeCompare(b.data.name);
+  })
+  .slice(0, 3);
+
+const title = `${project.data.name} | Projects | Sam Riddle`;
+const canonicalUrl = `https://samuelwriddle.com/projects/${project.id}`;
+const projectStack = project.data.tags.slice(0, 2);
+const collaboration = project.data.collaboration ?? project.data.type;
+const sectionLinks = headings.filter(
+  (heading) => heading.depth === 2 || heading.depth === 3,
+);
+const coverPanelClass =
+  "cover-panel border-line-soft bg-surface-solid relative mb-12 flex aspect-auto min-h-40 flex-col items-center justify-center gap-3 overflow-hidden rounded-[0.875rem] border px-4 py-12 sm:min-h-0";
+const coverImageClass =
+  " w-full object-contain sm:h-auto sm:max-h-[72%] sm:w-auto sm:max-w-[min(76%,38rem)]";
+const coverCaptionClass =
+  "text-tertiary font-mono text-[0.68rem] italic sm:absolute sm:right-4 sm:bottom-3";
+const relatedProjectCardClass =
+  "border-line-soft bg-surface-solid hover:border-brand-medium hover:shadow-card-hover flex min-h-44 flex-col rounded-xl border p-5 transition hover:-translate-y-0.5";
+---
+
+<PageLayout
+  title={title}
+  description={project.data.description}
+  canonicalUrl={canonicalUrl}
+  imageUrl={project.data.image
+    ? `https://samuelwriddle.com${project.data.image}`
+    : undefined}
+>
+  <div
+    class="reading-progress from-brand-light to-brand fixed top-0 left-0 z-[60] h-0.5 w-0 bg-gradient-to-r shadow-[0_0_8px_rgb(var(--color-accent-rgb)/0.5)]"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="px-4 pt-10 md:px-8">
+    <Container>
+      <a
+        href="/projects"
+        class="back-to-projects-link text-tertiary hover:text-brand relative inline-flex items-center gap-2 font-mono text-[0.8rem] transition-colors"
+      >
+        <svg
+          class="h-3.5 w-3.5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M19 12H5"></path>
+          <path d="m11 18-6-6 6-6"></path>
+        </svg>
+        Back to projects
+      </a>
+    </Container>
+  </div>
+
+  <section class="px-4 pt-10 md:px-8 md:pt-14" aria-labelledby="project-title">
+    <Container>
+      <div class="min-w-0">
+        <h1
+          id="project-title"
+          class="mb-6 max-w-4xl text-[clamp(2rem,5vw,4rem)] leading-[1.05] font-extrabold tracking-normal"
+        >
+          {project.data.name}
+        </h1>
+
+        <p class="text-secondary max-w-3xl text-lg leading-relaxed">
+          {project.data.description}
+        </p>
+      </div>
+
+      <ProjectStatusCard
+        orientation="horizontal"
+        status={project.data.status}
+        timeline={project.data.timeline}
+        role={project.data.role}
+        collaboration={collaboration}
+        context={project.data.context}
+        stack={projectStack}
+      />
+    </Container>
+  </section>
+
+  <section class="px-4 pb-16 md:px-8 md:pb-24" aria-label="Project details">
+    <Container class="pt-10">
+      <div class={coverPanelClass}>
+        {
+          project.data.image ? (
+            <img
+              src={project.data.image}
+              alt=""
+              loading="eager"
+              class={coverImageClass}
+            />
+          ) : (
+            <span
+              class="cover-panel-mark block aspect-square w-20"
+              aria-hidden="true"
+            />
+          )
+        }
+        {
+          project.data.coverCaption && (
+            <p class={coverCaptionClass}>{project.data.coverCaption}</p>
+          )
+        }
+      </div>
+
+      <div
+        class:list={[
+          "grid items-start gap-10",
+          sectionLinks.length > 0 &&
+            "lg:grid-cols-[minmax(0,1fr)_minmax(11rem,14rem)] xl:gap-14",
+        ]}
+      >
+        <article class="min-w-0">
+          <div class="markdown">
+            <Content />
+          </div>
+        </article>
+
+        <StickySectionNav links={sectionLinks} />
+      </div>
+    </Container>
+  </section>
+
+  <section class="px-4 pb-16 md:px-8 md:pb-24" aria-labelledby="more-projects">
+    <Container>
+      {
+        relatedProjects.length > 0 && (
+          <>
+            <div class="mb-12 max-w-2xl">
+              <h2 id="more-projects" class="text-3xl font-bold">
+                More <span class="text-brand">Projects</span>
+              </h2>
+            </div>
+            <div class="grid gap-4 min-[900px]:grid-cols-3 sm:grid-cols-2">
+              {relatedProjects.map((related) => {
+                const href = related.data.unpublished
+                  ? related.data.href
+                  : `/projects/${related.id}`;
+                const external = related.data.unpublished;
+
+                return (
+                  <a
+                    href={href}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    class={relatedProjectCardClass}
+                  >
+                    <h2 class="mb-3 text-base leading-snug font-semibold">
+                      {related.data.name}
+                    </h2>
+                    <p class="text-secondary text-sm leading-relaxed">
+                      {related.data.description}
+                    </p>
+                  </a>
+                );
+              })}
+            </div>
+          </>
+        )
+      }
+    </Container>
+  </section>
+
+  <ContactSection />
+</PageLayout>
+
+<script>
+  import "../../scripts/content-page.js";
+</script>
+
+<style>
+  .cover-panel-mark {
+    background: var(--color-accent);
+    opacity: 0.18;
+    -webkit-mask: url("/favicon-red.svg") center / contain no-repeat;
+    mask: url("/favicon-red.svg") center / contain no-repeat;
+  }
+
+  .back-to-projects-link::after {
+    position: absolute;
+    right: 50%;
+    bottom: -0.375rem;
+    left: 50%;
+    height: 0.125rem;
+    content: "";
+    background-color: var(--color-accent);
+    border-radius: 999px;
+    transition:
+      right var(--duration-fast) var(--ease-standard),
+      left var(--duration-fast) var(--ease-standard);
+  }
+
+  .back-to-projects-link:hover::after {
+    right: 0;
+    left: 0;
+  }
+</style>
