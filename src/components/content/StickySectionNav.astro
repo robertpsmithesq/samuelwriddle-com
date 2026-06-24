@@ -1,0 +1,55 @@
+---
+interface SectionLink {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  links: SectionLink[];
+  label?: string;
+}
+
+const { links, label = "Sections" } = Astro.props;
+---
+
+{
+  links.length > 0 && (
+    <aside
+      class="sticky-section-nav border-line-soft bg-surface-solid sticky top-24 hidden rounded-xl border p-4 lg:block"
+      aria-label={label}
+      data-section-nav
+    >
+      <p class="text-tertiary mb-3 font-mono text-[0.7rem] tracking-[0.08em] uppercase">
+        {label}
+      </p>
+      <nav>
+        <ol class="space-y-1">
+          {links.map((link) => (
+            <li>
+              <a
+                href={`#${link.slug}`}
+                class:list={[
+                  "sticky-section-nav-link text-secondary hover:text-brand block rounded-md px-3 py-2 leading-snug transition",
+                  link.depth === 2
+                    ? "text-sm"
+                    : "text-tertiary border-line-soft ml-3 py-1.5 pl-3 text-xs",
+                ]}
+                data-section-nav-link
+              >
+                {link.text}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </aside>
+  )
+}
+
+<style>
+  .sticky-section-nav-link.is-active {
+    color: var(--color-text-primary);
+    background: rgb(var(--color-accent-rgb) / 0.1);
+  }
+</style>
