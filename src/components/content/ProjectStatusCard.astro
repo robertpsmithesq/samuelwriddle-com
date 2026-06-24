@@ -1,0 +1,72 @@
+---
+interface DetailItem {
+  label: string;
+  value?: string;
+}
+
+interface Props {
+  orientation?: "vertical" | "horizontal";
+  status?: string;
+  timeline?: string;
+  role?: string;
+  collaboration?: string;
+  context?: string;
+  stack?: string[];
+}
+
+const {
+  orientation = "vertical",
+  status,
+  timeline,
+  role,
+  collaboration,
+  context,
+  stack = [],
+} = Astro.props;
+
+const horizontal = orientation === "horizontal";
+const visibleStack = stack.filter(Boolean).slice(0, 1);
+const details: DetailItem[] = [
+  { label: "Timeline", value: timeline },
+  { label: "Context", value: context },
+  { label: "Collaboration", value: collaboration },
+  { label: "Role", value: role },
+  { label: "Stack", value: visibleStack[0] },
+  { label: "Status", value: status },
+].filter((item) => item.value);
+---
+
+<aside
+  class:list={[
+    "project-status-card border-line-soft w-full rounded-xl",
+    horizontal && "mt-10 lg:flex lg:items-start",
+  ]}
+  aria-label="Project snapshot"
+>
+  {
+    details.length > 0 && (
+      <dl
+        class:list={[
+          "border-line-soft grid gap-px overflow-hidden rounded-lg",
+          horizontal && "lg:flex lg:flex-1",
+        ]}
+      >
+        {details.map((item) => (
+          <div
+            class:list={[
+              "grid gap-1 px-4 py-3 sm:grid-cols-[7.5rem_minmax(0,1fr)] sm:items-baseline",
+              horizontal && "lg:block lg:min-w-0 lg:flex-1",
+            ]}
+          >
+            <dt class="text-tertiary font-mono text-[0.72rem] uppercase">
+              {item.label}
+            </dt>
+            <dd class="text-primary text-sm leading-snug font-medium">
+              {item.value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    )
+  }
+</aside>

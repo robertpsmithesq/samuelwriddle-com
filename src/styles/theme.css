@@ -6,6 +6,7 @@
   --color-canvas-overlay: var(--color-background-overlay);
   --color-menu: var(--color-menu-background);
   --color-surface: var(--color-surface-soft);
+  --color-surface-solid: var(--color-solid-surface);
   --color-badge-solid: var(--badge-solid-color);
 
   --color-primary: var(--color-text-primary);
