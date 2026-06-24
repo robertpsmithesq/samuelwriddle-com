@@ -1,0 +1,29 @@
+---
+import AboutSection from "../components/sections/AboutSection.astro";
+import ContactSection from "../components/sections/ContactSection.astro";
+import EducationSection from "../components/sections/EducationSection.astro";
+import ExperienceSection from "../components/sections/ExperienceSection.astro";
+import SkillsSection from "../components/sections/SkillsSection.astro";
+import StrengthsSection from "../components/sections/StrengthsSection.astro";
+import PageHero from "../components/ui/PageHero.astro";
+import PageLayout from "../layouts/PageLayout.astro";
+---
+
+<PageLayout
+  title="About | Sam Riddle"
+  description="Learn about Sam Riddle's experience, education, skills, strengths, and background."
+  canonicalUrl="https://samuelwriddle.com/about"
+>
+  <PageHero
+    caption="A little more"
+    title="About Me"
+    description="I'm an early-career software engineer, focusing on the application of AI in educational technology. I have several passions and interests influencing my long-term career direction."
+  />
+
+  <AboutSection />
+  <ExperienceSection />
+  <SkillsSection />
+  <StrengthsSection />
+  <EducationSection />
+  <ContactSection />
+</PageLayout>
