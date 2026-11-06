@@ -62,15 +62,16 @@ const relatedProjectCardClass =
   title={title}
   description={project.data.description}
   canonicalUrl={canonicalUrl}
-  imageUrl={project.data.image
-    ? `https://samuelwriddle.com${project.data.image}`
-    : undefined}
+  imageUrl={
+    project.data.image
+      ? `https://samuelwriddle.com${project.data.image}`
+      : undefined
+  }
 >
   <div
     class="reading-progress from-brand-light to-brand fixed top-0 left-0 z-[60] h-0.5 w-0 bg-gradient-to-r shadow-[0_0_8px_rgb(var(--color-accent-rgb)/0.5)]"
     aria-hidden="true"
-  >
-  </div>
+  ></div>
 
   <div class="px-4 pt-10 md:px-8">
     <Container>
@@ -126,26 +127,22 @@ const relatedProjectCardClass =
   <section class="px-4 pb-16 md:px-8 md:pb-24" aria-label="Project details">
     <Container class="pt-10">
       <div class={coverPanelClass}>
-        {
-          project.data.image ? (
-            <img
-              src={project.data.image}
-              alt=""
-              loading="eager"
-              class={coverImageClass}
-            />
-          ) : (
-            <span
-              class="cover-panel-mark block aspect-square w-20"
-              aria-hidden="true"
-            />
-          )
-        }
-        {
-          project.data.coverCaption && (
-            <p class={coverCaptionClass}>{project.data.coverCaption}</p>
-          )
-        }
+        {project.data.image ? (
+          <img
+            src={project.data.image}
+            alt=""
+            loading="eager"
+            class={coverImageClass}
+          />
+        ) : (
+          <span
+            class="cover-panel-mark block aspect-square w-20"
+            aria-hidden="true"
+          />
+        )}
+        {project.data.coverCaption && <p class={coverCaptionClass}>
+          {project.data.coverCaption}
+        </p>}
       </div>
 
       <div
@@ -168,41 +165,37 @@ const relatedProjectCardClass =
 
   <section class="px-4 pb-16 md:px-8 md:pb-24" aria-labelledby="more-projects">
     <Container>
-      {
-        relatedProjects.length > 0 && (
-          <>
-            <div class="mb-12 max-w-2xl">
-              <h2 id="more-projects" class="text-3xl font-bold">
-                More <span class="text-brand">Projects</span>
-              </h2>
-            </div>
-            <div class="grid gap-4 min-[900px]:grid-cols-3 sm:grid-cols-2">
-              {relatedProjects.map((related) => {
-                const href = related.data.unpublished
-                  ? related.data.href
-                  : `/projects/${related.id}`;
-                const external = related.data.unpublished;
+      {relatedProjects.length > 0 && (
+        <>
+          <div class="mb-12 max-w-2xl">
+            <h2 id="more-projects" class="text-3xl font-bold">
+              More <span class="text-brand">Projects</span>
+            </h2>
+          </div>
+          <div class="grid gap-4 min-[900px]:grid-cols-3 sm:grid-cols-2">
+            {relatedProjects.map((related) => {
+              const href = related.data.unpublished
+                ? related.data.href
+                : `/projects/${related.id}`;
+              const external = related.data.unpublished;
 
-                return (
-                  <a
-                    href={href}
-                    target={external ? "_blank" : undefined}
-                    rel={external ? "noopener noreferrer" : undefined}
-                    class={relatedProjectCardClass}
-                  >
-                    <h2 class="mb-3 text-base leading-snug font-semibold">
-                      {related.data.name}
-                    </h2>
-                    <p class="text-secondary text-sm leading-relaxed">
-                      {related.data.description}
-                    </p>
-                  </a>
-                );
-              })}
-            </div>
-          </>
-        )
-      }
+              return <a
+                href={href}
+                target={external ? "_blank" : undefined}
+                rel={external ? "noopener noreferrer" : undefined}
+                class={relatedProjectCardClass}
+              >
+                <h2 class="mb-3 text-base leading-snug font-semibold">
+                  {related.data.name}
+                </h2>
+                <p class="text-secondary text-sm leading-relaxed">
+                  {related.data.description}
+                </p>
+              </a>;
+            })}
+          </div>
+        </>
+      )}
     </Container>
   </section>
 

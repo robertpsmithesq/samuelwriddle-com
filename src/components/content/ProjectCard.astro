@@ -27,13 +27,11 @@ const captionClasses =
   aria-label={external ? `Open ${name}` : `View ${name} project details`}
 >
   <div class={previewClasses} aria-hidden="true">
-    {
-      image ? (
-        <img class={imageClasses} src={image} alt="" loading="lazy" />
-      ) : (
-        <span class="project-card-logo" />
-      )
-    }
+    {image ? (
+      <img class={imageClasses} src={image} alt="" loading="lazy" />
+    ) : (
+      <span class="project-card-logo" />
+    )}
   </div>
   <div class={captionClasses}>
     <p class="font-bold">{name}</p>

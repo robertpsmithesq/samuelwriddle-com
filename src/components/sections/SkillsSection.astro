@@ -56,20 +56,16 @@ const outputPromptClasses =
     </div>
 
     <div class={mapClasses} aria-label="Skills mapped to outcomes">
-      {
-        skillMappings.map((skill) => (
-          <article class={rowClasses}>
-            <div class={headingWrapClasses}>
-              <h3 class={headingClasses}>{skill.skill}</h3>
-            </div>
+      {skillMappings.map((skill) => <article class={rowClasses}>
+        <div class={headingWrapClasses}>
+          <h3 class={headingClasses}>{skill.skill}</h3>
+        </div>
 
-            <div>
-              <p class={outputTextClasses}>{skill.output}</p>
-              <p class={outputPromptClasses}>{skill.prompt}</p>
-            </div>
-          </article>
-        ))
-      }
+        <div>
+          <p class={outputTextClasses}>{skill.output}</p>
+          <p class={outputPromptClasses}>{skill.prompt}</p>
+        </div>
+      </article>)}
     </div>
   </Container>
 </section>

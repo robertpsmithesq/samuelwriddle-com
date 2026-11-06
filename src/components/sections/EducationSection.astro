@@ -40,21 +40,19 @@ const toDateLabel = (startDate: Date, endDate: Date) =>
 
     <div class="mx-auto w-full md:w-[60vw] md:max-w-full">
       <Timeline>
-        {
-          sortedEducationItems.map((education) => (
-            <EducationCard
-              degree={education.data.degree}
-              dateLabel={toDateLabel(
-                education.data.startDate,
-                education.data.endDate,
-              )}
-              institution={education.data.institution}
-              location={education.data.location}
-              details={education.data.details}
-              highlights={education.data.highlights}
-            />
-          ))
-        }
+        {sortedEducationItems.map((education) => (
+          <EducationCard
+            degree={education.data.degree}
+            dateLabel={toDateLabel(
+              education.data.startDate,
+              education.data.endDate,
+            )}
+            institution={education.data.institution}
+            location={education.data.location}
+            details={education.data.details}
+            highlights={education.data.highlights}
+          />
+        ))}
       </Timeline>
     </div>
   </Container>

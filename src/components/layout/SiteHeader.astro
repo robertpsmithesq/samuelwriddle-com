@@ -26,25 +26,20 @@ const currentPath = Astro.url.pathname;
         class="inline-flex items-center justify-center"
         aria-label="Sam Riddle home"
       >
-        <span class="site-logo-mark bg-brand block h-8 w-8" aria-hidden="true"
+        <span
+          class="site-logo-mark bg-brand block h-8 w-8"
+          aria-hidden="true"
         ></span>
       </a>
 
       <div class="hidden gap-6 text-sm md:flex">
-        {
-          navItems.map((item) => (
-            <a
-              href={item.href}
-              class:list={[
-                navLinkClasses,
-                currentPath === item.href && "active",
-              ]}
-              aria-current={currentPath === item.href ? "page" : undefined}
-            >
-              {item.label}
-            </a>
-          ))
-        }
+        {navItems.map((item) => <a
+          href={item.href}
+          class:list={[navLinkClasses, currentPath === item.href && "active"]}
+          aria-current={currentPath === item.href ? "page" : undefined}
+        >
+          {item.label}
+        </a>)}
       </div>
 
       <MobileNav navItems={navItems} />

@@ -78,31 +78,25 @@ const titleClasses = [
     aria-label={external ? `Open ${name}` : `View ${name} project details`}
   >
     <div class:list={imageClasses} aria-hidden="true">
-      {
-        image ? (
-          <img class="block object-contain" src={image} alt="" loading="lazy" />
-        ) : (
-          <span class="project-detail-image-mark" />
-        )
-      }
+      {image ? (
+        <img class="block object-contain" src={image} alt="" loading="lazy" />
+      ) : (
+        <span class="project-detail-image-mark" />
+      )}
     </div>
 
     <div class:list={bodyClasses}>
       <div class="mb-[0.35rem] flex flex-wrap items-center gap-3">
-        {
-          featured ? (
-            <h2 class:list={titleClasses}>{name}</h2>
-          ) : (
-            <h3 class:list={titleClasses}>{name}</h3>
-          )
-        }
-        {
-          featured && (
-            <p class="border-brand-medium bg-brand-soft text-brand before:bg-brand flex w-fit shrink-0 items-center gap-[0.35rem] rounded-full border px-[0.65rem] py-[0.2rem] font-mono text-[0.68rem] before:block before:h-[0.4rem] before:w-[0.4rem] before:rounded-full before:content-['']">
-              My favorite
-            </p>
-          )
-        }
+        {featured ? (
+          <h2 class:list={titleClasses}>{name}</h2>
+        ) : (
+          <h3 class:list={titleClasses}>{name}</h3>
+        )}
+        {featured && <p
+          class="border-brand-medium bg-brand-soft text-brand before:bg-brand flex w-fit shrink-0 items-center gap-[0.35rem] rounded-full border px-[0.65rem] py-[0.2rem] font-mono text-[0.68rem] before:block before:h-[0.4rem] before:w-[0.4rem] before:rounded-full before:content-['']"
+        >
+          My favorite
+        </p>}
       </div>
 
       <p
@@ -122,13 +116,11 @@ const titleClasses = [
           class="flex flex-wrap gap-[0.35rem]"
           aria-label={`${name} technologies`}
         >
-          {
-            tags.map((technology) => (
-              <span class="text-tertiary border-line-medium bg-badge-solid inline-flex rounded-[0.3rem] border px-[0.55rem] py-[0.15rem] font-mono text-[0.68rem] transition">
-                {technology}
-              </span>
-            ))
-          }
+          {tags.map((technology) => <span
+            class="text-tertiary border-line-medium bg-badge-solid inline-flex rounded-[0.3rem] border px-[0.55rem] py-[0.15rem] font-mono text-[0.68rem] transition"
+          >
+            {technology}
+          </span>)}
         </div>
         <span
           class="text-tertiary border-line-medium group-hover:text-brand group-hover:border-brand-medium inline-flex h-[1.625rem] w-[1.625rem] shrink-0 items-center justify-center rounded-full border transition group-hover:translate-x-0.5"
