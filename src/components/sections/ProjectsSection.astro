@@ -37,72 +37,69 @@ const revealButtonClasses =
     </div>
 
     <div class="grid gap-24" aria-label="Featured projects">
-      {
-        visibleProjects.map((project) => (
-          <Project
-            name={project.data.name}
-            tag={project.data.tag}
-            href={
-              project.data.unpublished
-                ? project.data.href
-                : `/projects/${project.id}`
-            }
-            description={project.data.description}
-            tags={project.data.tags}
-            image={project.data.image}
-            reverse={project.data.reverse}
-            external={project.data.unpublished === true}
-          />
-        ))
-      }
+      {visibleProjects.map((project) => (
+        <Project
+          name={project.data.name}
+          tag={project.data.tag}
+          href={
+            project.data.unpublished
+              ? project.data.href
+              : `/projects/${project.id}`
+          }
+          description={project.data.description}
+          tags={project.data.tags}
+          image={project.data.image}
+          reverse={project.data.reverse}
+          external={project.data.unpublished === true}
+        />
+      ))}
 
-      {
-        expandableProjects.length > 0 && (
-          <div class="projects-reveal relative" data-projects-reveal>
-            <button
-              class={`${revealButtonClasses} projects-reveal-pill--top absolute top-24 left-1/2 z-[2] -translate-x-1/2 hover:-translate-x-1/2`}
-              type="button"
-              aria-expanded="false"
-              data-projects-expand
-            >
-              See more projects
-            </button>
+      {expandableProjects.length > 0 && <div
+        class="projects-reveal relative"
+        data-projects-reveal
+      >
+        <button
+          class={`${revealButtonClasses} projects-reveal-pill--top absolute top-24 left-1/2 z-[2] -translate-x-1/2 hover:-translate-x-1/2`}
+          type="button"
+          aria-expanded="false"
+          data-projects-expand
+        >
+          See more projects
+        </button>
 
-            <div
-              class="projects-reveal-items overflow-hidden opacity-100"
-              data-projects-reveal-items
-            >
-              <div class="grid gap-24">
-                {expandableProjects.map((project) => (
-                  <Project
-                    name={project.data.name}
-                    tag={project.data.tag}
-                    href={
-                      project.data.unpublished
-                        ? project.data.href
-                        : `/projects/${project.id}`
-                    }
-                    description={project.data.description}
-                    tags={project.data.tags}
-                    image={project.data.image}
-                    reverse={project.data.reverse}
-                    external={project.data.unpublished === true}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <button
-              class={`${revealButtonClasses} projects-reveal-pill--bottom mx-auto mt-12`}
-              type="button"
-              aria-expanded="true"
-              data-projects-collapse
-            >
-              Show fewer projects
-            </button>
+        <div
+          class="projects-reveal-items overflow-hidden opacity-100"
+          data-projects-reveal-items
+        >
+          <div class="grid gap-24">
+            {expandableProjects.map((project) => (
+              <Project
+                name={project.data.name}
+                tag={project.data.tag}
+                href={
+                  project.data.unpublished
+                    ? project.data.href
+                    : `/projects/${project.id}`
+                }
+                description={project.data.description}
+                tags={project.data.tags}
+                image={project.data.image}
+                reverse={project.data.reverse}
+                external={project.data.unpublished === true}
+              />
+            ))}
           </div>
-        )
-      }
+        </div>
+
+        <button
+          class={`${revealButtonClasses} projects-reveal-pill--bottom mx-auto mt-12`}
+          type="button"
+          aria-expanded="true"
+          data-projects-collapse
+        >
+          Show fewer projects
+        </button>
+      </div>}
     </div>
   </Container>
 </section>

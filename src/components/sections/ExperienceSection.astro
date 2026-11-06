@@ -50,68 +50,65 @@ const revealButtonClasses =
 
     <div class="mx-auto w-full md:w-[60vw] md:max-w-full">
       <Timeline>
-        {
-          visibleExperiences.map((experience) => (
-            <TimelineItem
-              title={experience.data.title}
-              dateLabel={toDateLabel(
-                experience.data.startDate,
-                experience.data.endDate,
-              )}
-              company={experience.data.company}
-              location={experience.data.location}
-              highlights={experience.data.highlights}
-              skills={experience.data.skills}
-              isCurrent={experience.data.endDate === "Present"}
-            />
-          ))
-        }
+        {visibleExperiences.map((experience) => (
+          <TimelineItem
+            title={experience.data.title}
+            dateLabel={toDateLabel(
+              experience.data.startDate,
+              experience.data.endDate,
+            )}
+            company={experience.data.company}
+            location={experience.data.location}
+            highlights={experience.data.highlights}
+            skills={experience.data.skills}
+            isCurrent={experience.data.endDate === "Present"}
+          />
+        ))}
 
-        {
-          expandableExperiences.length > 0 && (
-            <div class="timeline-reveal relative pt-2" data-timeline-reveal>
-              <button
-                class={`${revealButtonClasses} timeline-reveal-pill--top absolute top-7 left-1/2 z-[2] -translate-x-1/2 hover:-translate-x-1/2`}
-                type="button"
-                aria-expanded="false"
-                data-timeline-expand
-              >
-                Show earlier experience
-              </button>
+        {expandableExperiences.length > 0 && <div
+          class="timeline-reveal relative pt-2"
+          data-timeline-reveal
+        >
+          <button
+            class={`${revealButtonClasses} timeline-reveal-pill--top absolute top-7 left-1/2 z-[2] -translate-x-1/2 hover:-translate-x-1/2`}
+            type="button"
+            aria-expanded="false"
+            data-timeline-expand
+          >
+            Show earlier experience
+          </button>
 
-              <div
-                class="timeline-reveal-items overflow-hidden opacity-100"
-                data-timeline-reveal-items
-              >
-                <div class="space-y-12">
-                  {expandableExperiences.map((experience) => (
-                    <TimelineItem
-                      title={experience.data.title}
-                      dateLabel={toDateLabel(
-                        experience.data.startDate,
-                        experience.data.endDate,
-                      )}
-                      company={experience.data.company}
-                      location={experience.data.location}
-                      highlights={experience.data.highlights}
-                      skills={experience.data.skills}
-                      isCurrent={experience.data.endDate === "Present"}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <button
-                class={`${revealButtonClasses} timeline-reveal-pill--bottom mx-auto mt-8`}
-                type="button"
-                aria-expanded="true"
-                data-timeline-collapse
-              >
-                Hide earlier experience
-              </button>
+          <div
+            class="timeline-reveal-items overflow-hidden opacity-100"
+            data-timeline-reveal-items
+          >
+            <div class="space-y-12">
+              {expandableExperiences.map((experience) => (
+                <TimelineItem
+                  title={experience.data.title}
+                  dateLabel={toDateLabel(
+                    experience.data.startDate,
+                    experience.data.endDate,
+                  )}
+                  company={experience.data.company}
+                  location={experience.data.location}
+                  highlights={experience.data.highlights}
+                  skills={experience.data.skills}
+                  isCurrent={experience.data.endDate === "Present"}
+                />
+              ))}
             </div>
-          )
-        }
+          </div>
+
+          <button
+            class={`${revealButtonClasses} timeline-reveal-pill--bottom mx-auto mt-8`}
+            type="button"
+            aria-expanded="true"
+            data-timeline-collapse
+          >
+            Hide earlier experience
+          </button>
+        </div>}
       </Timeline>
     </div>
   </Container>

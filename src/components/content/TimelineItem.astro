@@ -32,7 +32,8 @@ const dotClasses = [
 
 <article class="relative pl-10 md:pl-20">
   <div class:list={dotClasses} aria-hidden="true">
-    <span class="bg-brand shadow-timeline-dot-inner h-1.5 w-1.5 rounded-full"
+    <span
+      class="bg-brand shadow-timeline-dot-inner h-1.5 w-1.5 rounded-full"
     ></span>
   </div>
 
@@ -42,13 +43,11 @@ const dotClasses = [
     >
       <div class="flex flex-wrap items-center gap-3">
         <h3 class="text-xl font-semibold">{title}</h3>
-        {
-          isCurrent && (
-            <span class="border-brand-strong bg-brand-soft text-brand rounded-full border px-2.5 py-1 font-mono text-xs">
-              Current
-            </span>
-          )
-        }
+        {isCurrent && <span
+          class="border-brand-strong bg-brand-soft text-brand rounded-full border px-2.5 py-1 font-mono text-xs"
+        >
+          Current
+        </span>}
       </div>
       <span class="text-secondary text-sm">{dateLabel}</span>
     </header>

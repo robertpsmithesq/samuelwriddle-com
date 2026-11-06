@@ -51,43 +51,39 @@ const [pinnedProject, ...tiledProjects] = sortedProjects;
   <section class="px-4 pb-16 md:px-8 md:pb-24" aria-labelledby="projects-grid">
     <Container>
       <div class="mosaic grid grid-cols-1 gap-5" role="list">
-        {
-          pinnedProject && (
-            <DetailedProjectCard
-              featured
-              name={pinnedProject.data.name}
-              tag={pinnedProject.data.tag}
-              href={
-                pinnedProject.data.unpublished
-                  ? pinnedProject.data.href
-                  : `/projects/${pinnedProject.id}`
-              }
-              description={pinnedProject.data.description}
-              tags={pinnedProject.data.tags}
-              image={pinnedProject.data.image}
-              external={pinnedProject.data.unpublished === true}
-            />
-          )
-        }
+        {pinnedProject && (
+          <DetailedProjectCard
+            featured
+            name={pinnedProject.data.name}
+            tag={pinnedProject.data.tag}
+            href={
+              pinnedProject.data.unpublished
+                ? pinnedProject.data.href
+                : `/projects/${pinnedProject.id}`
+            }
+            description={pinnedProject.data.description}
+            tags={pinnedProject.data.tags}
+            image={pinnedProject.data.image}
+            external={pinnedProject.data.unpublished === true}
+          />
+        )}
 
-        {
-          tiledProjects.map((project, index) => (
-            <DetailedProjectCard
-              name={project.data.name}
-              tag={project.data.tag}
-              href={
-                project.data.unpublished
-                  ? project.data.href
-                  : `/projects/${project.id}`
-              }
-              description={project.data.description}
-              tags={project.data.tags}
-              image={project.data.image}
-              variant={cardLayouts[index % cardLayouts.length]}
-              external={project.data.unpublished === true}
-            />
-          ))
-        }
+        {tiledProjects.map((project, index) => (
+          <DetailedProjectCard
+            name={project.data.name}
+            tag={project.data.tag}
+            href={
+              project.data.unpublished
+                ? project.data.href
+                : `/projects/${project.id}`
+            }
+            description={project.data.description}
+            tags={project.data.tags}
+            image={project.data.image}
+            variant={cardLayouts[index % cardLayouts.length]}
+            external={project.data.unpublished === true}
+          />
+        ))}
       </div>
     </Container>
   </section>

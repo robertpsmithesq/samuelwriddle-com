@@ -15,16 +15,14 @@ const strengthsListClasses =
 
     <div class="grid gap-10 md:grid-cols-5 md:gap-16">
       <ol class={strengthsListClasses} aria-label="CliftonStrengths themes">
-        {
-          strengths.map((strength, index) => (
-            <li class="border-line-soft flex items-center gap-4 border-b pb-5 last:border-b-0 last:pb-0">
-              <span class="text-brand font-mono text-sm">
-                {(index + 1).toString().padStart(2, "0")}
-              </span>
-              <span class="text-primary text-xl font-semibold">{strength}</span>
-            </li>
-          ))
-        }
+        {strengths.map((strength, index) => <li
+          class="border-line-soft flex items-center gap-4 border-b pb-5 last:border-b-0 last:pb-0"
+        >
+          <span class="text-brand font-mono text-sm">
+            {(index + 1).toString().padStart(2, "0")}
+          </span>
+          <span class="text-primary text-xl font-semibold">{strength}</span>
+        </li>)}
       </ol>
 
       <div

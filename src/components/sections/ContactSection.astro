@@ -34,41 +34,37 @@ const arrowClasses =
       </div>
 
       <div class="grid gap-4 md:grid-cols-2">
-        {
-          links.map((link) => (
-            <a
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class={linkClasses}
-              aria-label={`${link.label}: ${link.description} Opens in a new tab.`}
-            >
-              <span class={linkCopyClasses}>
-                <span class="text-primary text-lg leading-tight font-bold">
-                  {link.label}
-                </span>
-                <span class="text-secondary leading-[1.55]">
-                  {link.description}
-                </span>
-              </span>
+        {links.map((link) => <a
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class={linkClasses}
+          aria-label={`${link.label}: ${link.description} Opens in a new tab.`}
+        >
+          <span class={linkCopyClasses}>
+            <span class="text-primary text-lg leading-tight font-bold">
+              {link.label}
+            </span>
+            <span class="text-secondary leading-[1.55]">
+              {link.description}
+            </span>
+          </span>
 
-              <span class={arrowClasses} aria-hidden="true">
-                <svg
-                  class="h-4 w-4"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M5 12h14" />
-                  <path d="m13 6 6 6-6 6" />
-                </svg>
-              </span>
-            </a>
-          ))
-        }
+          <span class={arrowClasses} aria-hidden="true">
+            <svg
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </span>
+        </a>)}
       </div>
     </div>
   </Container>
